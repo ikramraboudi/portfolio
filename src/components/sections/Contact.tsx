@@ -61,7 +61,9 @@ export const Contact: React.FC = () => {
 
     setStatus('submitting');
 
-    const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
+    const formspreeId = (import.meta.env.VITE_FORMSPREE_ID && import.meta.env.VITE_FORMSPREE_ID.trim() !== '')
+      ? import.meta.env.VITE_FORMSPREE_ID
+      : 'xaeqgerl';
 
     // Si pas de Formspree ID configuré, ne PAS ouvrir Outlook
     if (!formspreeId || formspreeId === 'undefined' || formspreeId.trim() === '') {

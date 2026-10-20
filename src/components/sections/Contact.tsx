@@ -130,9 +130,12 @@ export const Contact: React.FC = () => {
             </h3>
 
             <div className="space-y-4">
-              {/* Email */}
+              {/* Email direct (ouvre Gmail Web) */}
               <a
-                href={`mailto:${profile.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Envoyer un email via Gmail Web"
                 className="group flex items-center gap-4 p-3.5 rounded-2xl bg-surface-softLight/60 dark:bg-surface-softDark/60 border border-line-light/50 dark:border-line-dark/50 hover:border-denim-300 dark:hover:border-denim-600 transition-colors"
               >
                 <div className="p-2.5 rounded-xl bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 group-hover:scale-110 transition-transform">

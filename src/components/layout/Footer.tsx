@@ -98,8 +98,11 @@ export const Footer: React.FC = () => {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href={`mailto:${profile.email}`}
-                aria-label="Envoyer un email à Ikram Raboudi"
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Envoyer un email à Ikram Raboudi via Gmail"
+                title="Envoyer un email (Gmail)"
                 className="p-2.5 rounded-xl border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-300 hover:scale-105 transition-all shadow-sm"
               >
                 <Mail className="w-5 h-5" />

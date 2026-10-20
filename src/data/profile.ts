@@ -21,7 +21,7 @@ export const profile: ProfileData = {
     github: 'https://github.com/ikramraboudi',
     repositories: 'https://github.com/ikramraboudi?tab=repositories',
     linkedin: 'https://www.linkedin.com/in/ikram-raboudi-796803332/',
-    email: 'mailto:ikramraboudi8@gmail.com',
+    email: 'https://mail.google.com/mail/?view=cm&fs=1&to=ikramraboudi8@gmail.com',
   },
   cvPath: 'assets/docs/CV_Ikram_Raboudi_PFE.pdf',
   photoPath: 'assets/ikram.png',

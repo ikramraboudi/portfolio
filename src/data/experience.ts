@@ -1,0 +1,86 @@
+import { ExperienceItem } from '../types';
+
+export const experiences: ExperienceItem[] = [
+  {
+    id: 'after-code-2026',
+    title: 'Stage de perfectionnement — Développement Mobile & Backend',
+    companyOrOrg: 'After Code',
+    location: 'Tunisie',
+    period: 'Janvier 2026',
+    type: 'experience',
+    badge: 'Stage de perfectionnement',
+    highlights: [
+      'Conception et développement de Klitchi, plateforme de livraison de repas composée de 3 applications mobiles Flutter interconnectées (client, livreur, restaurant).',
+      'Architecture et développement du backend haute performance avec Go (Fiber) et persistance PostgreSQL.',
+      'Intégration du suivi de commande en temps réel via WebSockets, authentification sécurisée JWT et notifications push Firebase.',
+    ],
+  },
+  {
+    id: 'code-temple-2025',
+    title: 'Stage d’initiation — Développement Web & Conception Graphique',
+    companyOrOrg: 'Code Temple',
+    location: 'Tunisie',
+    period: 'Janvier 2025',
+    type: 'experience',
+    badge: 'Stage d’initiation',
+    highlights: [
+      'Immersion et pratique de la méthodologie Agile / Scrum en environnement d’équipe.',
+      'Création, personnalisation et administration de contenu dynamique avec WordPress.',
+      'Conception des identités visuelles, illustrations vectorielles et bannières d’articles avec Adobe Illustrator.',
+    ],
+  },
+  {
+    id: 'iset-kelibia-licence',
+    title: 'Licence en Technologies de l’Informatique — Spécialité DSI',
+    companyOrOrg: 'ISET Kélibia (Institut Supérieur des Études Technologiques)',
+    location: 'Kélibia, Nabeul, Tunisie',
+    period: '2024 – Présent',
+    type: 'education',
+    badge: 'En cours · 3e année',
+    highlights: [
+      'Formation approfondie en Développement des Systèmes d’Information : programmation orientée objet, génie logiciel, bases de données relationnelles et architectures n-tiers.',
+      'Projets pratiques sur Flutter, Symfony, Java, Python et Go.',
+      'Recherche active d’un stage PFE (février → mai 2027) pour clôturer le cursus.',
+    ],
+  },
+  {
+    id: 'cisco-networking',
+    title: 'Certification Cisco Networking Academy',
+    companyOrOrg: 'Cisco Networking Academy',
+    location: 'Formation certifiante',
+    period: '2024 – 2025',
+    type: 'certification',
+    badge: 'Badge officiel Cisco',
+    highlights: [
+      'Validation du badge « Notions de base des réseaux » (Networking Basics).',
+      'Maîtrise des protocoles de communication, adressage IP, routage et modèles OSI / TCP-IP.',
+    ],
+  },
+  {
+    id: 'tscai-uxui',
+    title: 'Formation UX/UI Design',
+    companyOrOrg: 'Club T’SCAI — ISET Kélibia',
+    location: 'Kélibia, Tunisie',
+    period: 'Octobre 2024',
+    type: 'certification',
+    badge: 'Certificat de participation',
+    highlights: [
+      'Conception de wireframes, prototypes interactifs et design systems sous Figma.',
+      'Principes d’ergonomie, hiérarchie visuelle, accessibilité et parcours utilisateur.',
+    ],
+  },
+  {
+    id: 'tscai-club',
+    title: 'Responsable Marketing & Communication Digitale',
+    companyOrOrg: 'Club T’SCAI (ISET Kélibia)',
+    location: 'ISET Kélibia',
+    period: '2024 – Présent',
+    type: 'association',
+    badge: 'Vie associative',
+    highlights: [
+      'Responsable Marketing (2025 – présent) et Assistante Marketing (2024 – 2025).',
+      'Conception graphique des affiches événementielles, visuels de communication et supports digitaux.',
+      'Participation active à la stratégie de communication sur les réseaux sociaux et dynamisation de la vie étudiante.',
+    ],
+  },
+];

@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #FAF7F2;
+    --surface-card: #FFFFFF;
+    --surface-soft: #F3EEE7;
+    --text-main: #26303B;
+    --text-secondary: #6B7684;
+    --primary: #5B7FA6;
+    --primary-hover: #4A6A8F;
+    --accent: #E8B9B3;
+    --accent-soft: #F6E3E0;
+    --badge-success: #8FB79B;
+    --border-color: #E7E0D6;
+  }
+
+  .dark {
+    --bg-main: #141A23;
+    --surface-card: #1D2530;
+    --surface-soft: #252E3B;
+    --text-main: #ECE8E1;
+    --text-secondary: #A5AFBC;
+    --primary: #8FB0D6;
+    --primary-hover: #A6C5EA;
+    --accent: #D9A7A1;
+    --accent-soft: #3A2A2E;
+    --badge-success: #8FB79B;
+    --border-color: #2F3947;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+
+  /* Focus visible accessible AA */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+}
+
+/* Animations respectueuses des préférences de réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Scrollbar personnalisée élégante */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #141A23;
+}
+::-webkit-scrollbar-thumb {
+  background: #C3D7EB;
+  border-radius: 9999px;
+  border: 2px solid #FAF7F2;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2F3947;
+  border: 2px solid #141A23;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5B7FA6;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #8FB0D6;
+}
+
+/* Pastille flottante délicate */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-soft-float {
+  animation: softFloat 4.5s ease-in-out infinite;
+}
+
+.animate-soft-float-delayed {
+  animation: softFloat 5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-soft-float-slow {
+  animation: softFloat 6s ease-in-out infinite;
+  animation-delay: 1s;
+}

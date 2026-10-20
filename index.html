@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Préconnexion et polices Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Titre et métadonnées SEO -->
+    <title>Ikram Raboudi — Développeuse Web & Mobile | Recherche Stage PFE 2027</title>
+    <meta
+      name="description"
+      content="Portfolio d'Ikram Raboudi, étudiante en 3e année Licence DSI à l'ISET Kélibia. Développeuse Web & Mobile (Flutter, Symfony, Go). Recherche stage PFE de février à mai 2027."
+    />
+    <meta name="author" content="Ikram Raboudi" />
+    <meta name="keywords" content="Ikram Raboudi, Développeuse Web, Développeuse Mobile, Flutter, Symfony, Go, DSI, ISET Kélibia, Stage PFE 2027, Portfolio, Tunisie" />
+
+    <!-- Open Graph / Réseaux sociaux -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Ikram Raboudi — Développeuse Web & Mobile | Portfolio" />
+    <meta
+      property="og:description"
+      content="Étudiante en Licence DSI à l'ISET Kélibia, passionnée par le développement Flutter, Symfony et Go. Disponible pour un stage PFE (février → mai 2027)."
+    />
+    <meta property="og:image" content="/assets/ikram.png" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ikram Raboudi — Développeuse Web & Mobile" />
+    <meta
+      name="twitter:description"
+      content="Découvrez mes projets mobiles Flutter et web Symfony. En recherche de stage PFE pour février-mai 2027."
+    />
+    <meta name="twitter:image" content="/assets/ikram.png" />
+
+    <!-- Données structurées JSON-LD (Schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ikram Raboudi",
+        "jobTitle": "Développeuse Web & Mobile",
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "ISET Kélibia"
+        },
+        "sameAs": [
+          "https://github.com/ikramraboudi",
+          "https://www.linkedin.com/in/ikram-raboudi-796803332/"
+        ]
+      }
+    </script>
+
+    <!-- Thème initial pour éviter le flash blanc en mode sombre -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="bg-bg-light text-content-mainLight dark:bg-bg-dark dark:text-content-mainDark transition-colors duration-300 font-sans antialiased selection:bg-rose-powder/30 selection:text-denim-700 dark:selection:bg-denim-400/30 dark:selection:text-denim-200 min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

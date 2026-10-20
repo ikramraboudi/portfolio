@@ -88,7 +88,7 @@ export const Hero: React.FC = () => {
                 title="Télécharger le CV au format PDF"
               >
                 <FileDown className="w-4 h-4 text-denim-500" />
-                <span className="underline underline-offset-4">CV complet</span>
+                <span className="underline underline-offset-4">CV</span>
               </a>
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { SectionHeading } from '../common/SectionHeading';
 
@@ -23,6 +23,15 @@ export const Contact: React.FC = () => {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const validate = (): boolean => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
@@ -130,26 +139,47 @@ export const Contact: React.FC = () => {
             </h3>
 
             <div className="space-y-4">
-              {/* Email direct (ouvre Gmail Web) */}
-              <a
-                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Envoyer un email via Gmail Web"
-                className="group flex items-center gap-4 p-3.5 rounded-2xl bg-surface-softLight/60 dark:bg-surface-softDark/60 border border-line-light/50 dark:border-line-dark/50 hover:border-denim-300 dark:hover:border-denim-600 transition-colors"
-              >
-                <div className="p-2.5 rounded-xl bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 group-hover:scale-110 transition-transform">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                    Email direct
-                  </span>
-                  <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark truncate group-hover:text-denim-600 dark:group-hover:text-denim-400">
-                    {profile.email}
-                  </span>
-                </div>
-              </a>
+              {/* Email direct (ouvre Gmail Web ou copie d'adresse) */}
+              <div className="group flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-surface-softLight/60 dark:bg-surface-softDark/60 border border-line-light/50 dark:border-line-dark/50 hover:border-denim-300 dark:hover:border-denim-600 transition-colors">
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Envoyer un email via Gmail (navigateur)"
+                  className="flex items-center gap-4 min-w-0 flex-1"
+                >
+                  <div className="p-2.5 rounded-xl bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 group-hover:scale-110 transition-transform shrink-0">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
+                      Email direct (Gmail Web)
+                    </span>
+                    <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark truncate group-hover:text-denim-600 dark:group-hover:text-denim-400">
+                      {profile.email}
+                    </span>
+                  </div>
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copier l'adresse email"
+                  aria-label="Copier l'adresse email"
+                  className="p-2 rounded-xl border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-300 transition-all shrink-0 flex items-center gap-1.5 text-xs font-mono"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-500" />
+                      <span className="text-[11px] text-emerald-600 dark:text-emerald-400">Copié</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      <span className="hidden sm:inline text-[11px]">Copier</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
               {/* Téléphone */}
               <a

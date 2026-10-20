@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Send, FileDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowRight, Send, FileDown, Github, Linkedin, Sparkles } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { getAssetUrl } from '../../utils/paths';
 import { TechLogo } from '../common/TechLogo';
@@ -113,16 +113,6 @@ export const Hero: React.FC = () => {
                   className="p-2 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark hover:text-denim-600 dark:hover:text-denim-300 hover:scale-110 transition-all shadow-sm"
                 >
                   <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Contacter par Email (Gmail)"
-                  title="Envoyer un email via Gmail"
-                  className="p-2 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark hover:text-denim-600 dark:hover:text-denim-300 hover:scale-110 transition-all shadow-sm"
-                >
-                  <Mail className="w-4 h-4" />
                 </a>
               </div>
             </div>

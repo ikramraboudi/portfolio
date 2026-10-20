@@ -63,28 +63,17 @@ export const Contact: React.FC = () => {
 
     const formspreeId = import.meta.env.VITE_FORMSPREE_ID;
 
-    // Si pas de Formspree ID, bascule gracieuse sur mailto pré-rempli
+    // Si pas de Formspree ID configuré, ne PAS ouvrir Outlook
     if (!formspreeId || formspreeId === 'undefined' || formspreeId.trim() === '') {
-      const subjectEncoded = encodeURIComponent(`[Portfolio] ${formData.subject} - ${formData.name}`);
-      const bodyEncoded = encodeURIComponent(
-        `Bonjour Ikram,\n\n${formData.message}\n\nDe : ${formData.name} (${formData.email})`
+      setStatus('error');
+      setToastMessage(
+        "Pour envoyer l'email directement sans ouvrir Outlook, renseignez votre identifiant Formspree dans le fichier .env (VITE_FORMSPREE_ID=votre_id)."
       );
-      window.location.href = `mailto:${profile.email}?subject=${subjectEncoded}&body=${bodyEncoded}`;
-
-      setStatus('success');
-      setToastMessage('Votre client email a été ouvert avec votre message pré-rempli !');
-      setFormData({
-        name: '',
-        email: '',
-        subject: 'Proposition de stage PFE',
-        message: '',
-        honeypot: '',
-      });
-      setTimeout(() => setStatus('idle'), 6000);
+      setTimeout(() => setStatus('idle'), 8000);
       return;
     }
 
-    // Envoi via API Formspree
+    // Envoi direct via API Formspree en arrière-plan (sans ouvrir Outlook ni aucune application)
     try {
       const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
         method: 'POST',

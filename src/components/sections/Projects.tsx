@@ -5,6 +5,7 @@ import { profile } from '../../data/profile';
 import { Project } from '../../types';
 import { getAssetUrl } from '../../utils/paths';
 import { SectionHeading } from '../common/SectionHeading';
+import { ProjectsIntro } from './ProjectsIntro';
 import { ProjectCard } from './ProjectCard';
 import { Lightbox } from '../common/Lightbox';
 
@@ -22,6 +23,9 @@ export const Projects: React.FC = () => {
         title="Projets"
         subtitle="Sélection de 6 réalisations concrètes démontrant mon savoir-faire mobile, web et desktop."
       />
+
+      {/* Bandeau d'introduction de la section Projets avec Avatar 3D */}
+      <ProjectsIntro />
 
       {/* Filtres de catégorie */}
       <div className="flex flex-wrap items-center gap-2 mb-10 pb-1">

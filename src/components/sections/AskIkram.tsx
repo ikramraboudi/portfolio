@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RotateCcw, ArrowRight } from 'lucide-react';
 import { askOptions, AskOption } from '../../data/askAnswers';
-import { getAssetUrl } from '../../utils/paths';
 
 interface ChatMessage {
   id: string;
@@ -96,11 +95,11 @@ export const AskIkram: React.FC = () => {
           <div className="px-4 py-3 bg-surface-light/95 dark:bg-surface-dark/95 border-b border-line-light/70 dark:border-line-dark/70 backdrop-blur-md flex items-center justify-between shrink-0">
             <div className="flex items-center gap-3 min-w-0">
               <div className="relative shrink-0">
-                <img
-                  src={getAssetUrl('assets/avatar.jpg')}
-                  alt="Mini avatar d'Ikram"
-                  className="w-9 h-9 rounded-full object-cover object-top border border-line-light dark:border-line-dark shadow-sm"
-                />
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-denim-500 to-rose-powder p-0.5 flex items-center justify-center shadow-sm">
+                  <div className="w-full h-full rounded-full bg-surface-light dark:bg-surface-dark flex items-center justify-center font-serif font-bold text-xs text-denim-600 dark:text-denim-300">
+                    IR
+                  </div>
+                </div>
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-surface-light dark:border-surface-dark" />
               </div>
               <div className="flex flex-col min-w-0">

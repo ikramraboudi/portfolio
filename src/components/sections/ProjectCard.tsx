@@ -71,7 +71,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
             <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity text-denim-500 shrink-0 ml-2" />
           </h3>
           {project.subtitle && (
-            <p className="text-xs font-medium text-denim-600/80 dark:text-denim-400/80 mt-0.5">
+            <p className="section-subtitle text-xs font-medium mt-0.5">
               {project.subtitle}
             </p>
           )}

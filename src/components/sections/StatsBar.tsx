@@ -57,7 +57,7 @@ const StatCard: React.FC<StatCardProps> = ({ icon, value, suffix = '', label, su
         <span className="text-xs sm:text-sm font-semibold text-content-mainLight dark:text-content-mainDark">
           {label}
         </span>
-        <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
+        <span className="section-subtitle text-[11px] font-mono">
           {subtitle}
         </span>
       </div>

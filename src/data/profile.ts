@@ -6,7 +6,11 @@ export const profile: ProfileData = {
   subRole: 'Flutter · Symfony · Go',
   tagline:
     "Étudiante en 3e année de Licence DSI à l'ISET Kélibia, je conçois des applications web et mobiles complètes, de l'interface à l'API.",
-  bio: "Étudiante en 3e année de Licence en Technologies de l'Informatique (Développement des Systèmes d'Information) à l'ISET Kélibia, je suis passionnée par le développement web et mobile. Je maîtrise Flutter, Symfony, PHP, Java et Python, et j'ai conçu des applications web et mobiles complètes. Je recherche un stage PFE de février à mai 2027 pour contribuer à des projets innovants au sein d'une équipe agile.",
+  bio: "Étudiante en 3e année de Licence en Technologies de l'Informatique (Développement des Systèmes d'Information) à l'ISET Kélibia, animée par un vif intérêt pour les nouvelles technologies et le développement logiciel. Je maîtrise Flutter, Symfony, PHP, Java et Python, et j'ai conçu des applications web et mobiles complètes. Je recherche un stage PFE de février à mai 2027 pour contribuer à des projets innovants au sein d'une équipe agile.",
+  bioParagraph1:
+    "Étudiante en 3e année de Licence en Technologies de l'Informatique (Développement des Systèmes d'Information) à l'ISET Kélibia, animée par un vif intérêt pour les nouvelles technologies et le développement logiciel. Je maîtrise Flutter, Symfony, PHP, Java et Python, et j'ai conçu des applications web et mobiles complètes. Je recherche un stage PFE de février à mai 2027 pour contribuer à des projets innovants au sein d'une équipe agile.",
+  bioParagraph2:
+    "Curieuse et proactive, j'accorde une importance majeure à la qualité du code, à la fluidité des interfaces utilisateur et à la robustesse des architectures backend (REST, WebSockets, bases relationnelles et NoSQL).",
   email: 'ikramraboudi8@gmail.com',
   phone: '+21655872196',
   displayPhone: '+216 55 872 196',
@@ -25,10 +29,11 @@ export const profile: ProfileData = {
   },
   cvPath: 'assets/docs/CV_Ikram_Raboudi_PFE.pdf',
   photoPath: 'assets/ikram.png',
+  avatarPath: 'assets/avatar.jpg',
   quickFacts: {
     location: 'Nabeul, Tunisie',
     education: 'ISET Kélibia — Licence DSI (2024 – présent)',
-    languages: 'Arabe (maternelle), Français, Anglais, Chinois',
+    languages: 'Arabe, Français, Anglais',
     search: 'Stage PFE (fév. → mai 2027)',
   },
   values: [

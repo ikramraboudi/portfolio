@@ -33,10 +33,9 @@ export const Experience: React.FC = () => {
   return (
     <section id="parcours" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="PARCOURS & ÉTUDES"
-        title="Expérience, formation &"
-        highlight="engagements"
-        description="Une trajectoire continue alliant rigueur académique en DSI, stages en entreprise et responsabilités associatives actives."
+        emoji="🎓"
+        title="Parcours"
+        subtitle="Expérience professionnelle, formation académique en DSI et engagements associatifs."
       />
 
       {/* Onglets de filtrage */}

@@ -51,6 +51,8 @@ export interface ProfileData {
   subRole: string;
   tagline: string;
   bio: string;
+  bioParagraph1: string;
+  bioParagraph2: string;
   email: string;
   phone: string;
   displayPhone: string;
@@ -69,6 +71,7 @@ export interface ProfileData {
   };
   cvPath: string;
   photoPath: string;
+  avatarPath: string;
   quickFacts: {
     location: string;
     education: string;

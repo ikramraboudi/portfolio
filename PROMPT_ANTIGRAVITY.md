@@ -95,7 +95,7 @@ Menu : **Accueil · À propos · Compétences · Projets · Parcours · Contact*
 Texte (reformule légèrement si besoin, garde le sens) :
 > Étudiante en 3e année de Licence en Technologies de l'Informatique (Développement des Systèmes d'Information) à l'ISET Kélibia, je suis passionnée par le développement web et mobile. Je maîtrise Flutter, Symfony, PHP, Java et Python, et j'ai conçu des applications web et mobiles complètes. Je recherche un stage PFE de février à mai 2027 pour contribuer à des projets innovants au sein d'une équipe agile.
 
-À côté du texte, des **cartes d'infos rapides** : 📍 Nabeul, Tunisie · 🎓 ISET Kélibia — Licence DSI (2024 – présent) · 🌍 Langues : Arabe (langue maternelle), Français, Anglais, Chinois · 🎯 Recherche : Stage PFE (fév. → mai 2027).
+À côté du texte, des **cartes d'infos rapides** : 📍 Nabeul, Tunisie · 🎓 ISET Kélibia — Licence DSI (2024 – présent) · 🌍 Langues : Arabe (langue maternelle), Français, Anglais · 🎯 Recherche : Stage PFE (fév. → mai 2027).
 Ajoute un petit bloc `whoami.ts` stylé (facultatif, discret) résumant : rôle, stack, statut.
 Valeurs / qualités (4 mini-cartes avec icônes) : Travail d'équipe · Communication · Gestion de projet · Créativité (et gestion du temps/priorités).
 
@@ -217,7 +217,7 @@ Ordre d'affichage : 1 → 6. Le dépôt GitHub est la destination du clic.
 **Vie associative**
 - **Club T'SCAI** — Responsable Marketing (2025 – présent), Assistante Marketing (2024 – 2025) : conception des affiches événementielles et participation à la stratégie de communication digitale sur les réseaux sociaux
 
-**Langues** : Arabe (langue maternelle) · Français · Anglais · Chinois
+**Langues** : Arabe (langue maternelle) · Français · Anglais
 
 ---
 

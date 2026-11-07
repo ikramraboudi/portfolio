@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check, Eye } from 'lucide-react';
 import { profile } from '../../data/profile';
+import { getAssetUrl } from '../../utils/paths';
 import { SectionHeading } from '../common/SectionHeading';
 
 interface FormData {
@@ -124,10 +125,9 @@ export const Contact: React.FC = () => {
   return (
     <section id="contact" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="CONTACT & ÉCHANGES"
-        title="Discutons d’un projet ou d’une"
-        highlight="opportunité PFE"
-        description="Une question, une offre de stage ou une idée de collaboration ? N’hésitez pas à m’écrire, je réponds généralement sous 24 heures."
+        emoji="💌"
+        title="Contact"
+        subtitle="Une question, une opportunité de stage PFE ou un projet ? Échangeons ensemble."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -238,6 +238,18 @@ export const Contact: React.FC = () => {
                 >
                   <Github className="w-4 h-4" />
                   <span>GitHub</span>
+                </a>
+              </div>
+              <div className="mt-3">
+                <a
+                  href={getAssetUrl(profile.cvPath)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-line-light dark:border-line-dark bg-surface-softLight/40 dark:bg-surface-softDark/40 text-xs font-semibold text-content-mainLight dark:text-content-mainDark hover:bg-denim-50 dark:hover:bg-denim-900/30 hover:text-denim-600 transition-colors"
+                  title="Consulter mon CV (PDF)"
+                >
+                  <Eye className="w-4 h-4 text-denim-600 dark:text-denim-400" />
+                  <span>Consulter mon CV</span>
                 </a>
               </div>
             </div>

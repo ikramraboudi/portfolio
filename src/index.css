@@ -41,6 +41,14 @@
     overflow-x: hidden;
   }
 
+  /* Sous-titres uniformes du thème : couleur primaire pure, sans dégradé ni ligne */
+  .section-subtitle {
+    color: var(--primary);
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
   /* Focus visible accessible AA */
   a:focus-visible,
   button:focus-visible,

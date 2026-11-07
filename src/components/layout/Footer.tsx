@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUp, Github, Linkedin, Heart } from 'lucide-react';
+import { ArrowUp, Github, Linkedin, Eye, Heart } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { getAssetUrl } from '../../utils/paths';
 
@@ -100,10 +100,13 @@ export const Footer: React.FC = () => {
             </div>
             <a
               href={getAssetUrl(profile.cvPath)}
-              download="CV_Ikram_Raboudi_PFE.pdf"
-              className="text-xs text-denim-600 dark:text-denim-400 hover:underline font-mono"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-denim-600 dark:text-denim-400 hover:underline font-mono"
+              title="Consulter mon CV (PDF)"
             >
-              → Télécharger le CV (PDF)
+              <Eye className="w-3.5 h-3.5" />
+              <span>Consulter mon CV</span>
             </a>
           </div>
         </div>

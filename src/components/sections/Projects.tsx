@@ -18,10 +18,9 @@ export const Projects: React.FC = () => {
   return (
     <section id="projets" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="PORTFOLIO & RÉALISATIONS"
-        title="Projets sélectionnés"
-        highlight="en production & académiques"
-        description="Une sélection de 6 projets concrets démontrant la maîtrise des architectures mobiles interconnectées, des applications web complexes et des outils desktop."
+        emoji="🚀"
+        title="Projets"
+        subtitle="Sélection de 6 réalisations concrètes démontrant mon savoir-faire mobile, web et desktop."
       />
 
       {/* Filtres de catégorie */}

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Send, FileDown, CheckCircle, Clock, MapPin } from 'lucide-react';
+import { Send, Eye, CheckCircle, Clock, MapPin } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { getAssetUrl } from '../../utils/paths';
 
 export const PfeBanner: React.FC = () => {
   return (
-    <section className="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="stage-pfe" className="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-denim-500 via-denim-600 to-denim-700 text-white p-8 sm:p-10 md:p-14 shadow-soft-lg">
         {/* Motifs géométriques décoratifs */}
         <div
@@ -19,21 +19,18 @@ export const PfeBanner: React.FC = () => {
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
           <div className="max-w-2xl">
-            {/* Badge de statut */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/15 text-white backdrop-blur-md border border-white/20 mb-4">
-              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse" />
-              <span>Opportunité de Stage PFE</span>
-            </div>
+            {/* Titre officiel de section avec emoji */}
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-tight flex items-center gap-3 mb-3">
+              <span className="text-3xl sm:text-4xl lg:text-5xl select-none" aria-hidden="true">🎯</span>
+              <span>Stage PFE</span>
+            </h2>
 
-            <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-              Je recherche un stage PFE de{' '}
-              <span className="text-rose-soft underline decoration-rose-powder/60 decoration-wavy underline-offset-8">
-                février à mai 2027
-              </span>
-            </h3>
+            <p className="text-base sm:text-lg md:text-xl text-denim-100 font-medium leading-relaxed mb-4">
+              Disponible de février à mai 2027 pour concevoir des applications web et mobiles innovantes.
+            </p>
 
-            <p className="mt-4 text-sm sm:text-base text-denim-100 leading-relaxed">
-              Prête à m’investir pleinement au sein de votre équipe pour concevoir des applications web & mobiles complètes (Flutter, Symfony, Go) avec rigueur, autonomie et méthodologie Agile.
+            <p className="text-sm sm:text-base text-denim-100/90 leading-relaxed">
+              Prête à m'investir pleinement au sein de votre équipe pour concevoir des applications web & mobiles complètes (Flutter, Symfony, Go) avec rigueur, autonomie et méthodologie Agile.
             </p>
 
             {/* Points d'engagement */}
@@ -65,11 +62,13 @@ export const PfeBanner: React.FC = () => {
 
             <a
               href={getAssetUrl(profile.cvPath)}
-              download="CV_Ikram_Raboudi_PFE.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full border border-white/40 bg-white/10 hover:bg-white/20 text-white font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95 backdrop-blur-sm"
+              title="Consulter mon CV (PDF)"
             >
-              <FileDown className="w-4 h-4" />
-              <span>Télécharger mon CV (PDF)</span>
+              <Eye className="w-4 h-4" />
+              <span>Consulter mon CV</span>
             </a>
           </div>
         </div>

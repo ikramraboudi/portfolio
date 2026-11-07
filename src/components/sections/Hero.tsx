@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Send, FileDown, Github, Linkedin, Sparkles } from 'lucide-react';
+import { ArrowRight, Send, Eye, Github, Linkedin, FolderGit2 } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { getAssetUrl } from '../../utils/paths';
 import { TechLogo } from '../common/TechLogo';
@@ -20,7 +20,7 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Colonne Gauche : Textes & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Badge de disponibilité PFE */}
+            {/* Badge de disponibilité PFE au-dessus du titre */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs sm:text-sm font-medium bg-sage-soft text-sage-dark dark:bg-sage-dark/20 dark:text-sage-badge border border-sage-badge/40 shadow-sm mb-6 transition-all hover:scale-105">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sage-badge opacity-75" />
@@ -34,28 +34,14 @@ export const Hero: React.FC = () => {
             {/* Titre principal */}
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-content-mainLight dark:text-content-mainDark leading-[1.15]">
               Bonjour, je suis{' '}
-              <span className="relative inline-block text-denim-600 dark:text-denim-400">
+              <span className="text-denim-600 dark:text-denim-400">
                 {profile.name}
-                <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-rose-powder dark:text-rose-dark -z-10 opacity-70"
-                  viewBox="0 0 200 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M3 9C50 3 150 2 197 9"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg>
               </span>
             </h1>
 
-            {/* Sous-titre */}
-            <p className="mt-4 text-xl sm:text-2xl font-serif text-denim-700 dark:text-denim-300 font-medium">
-              {profile.role} — <span className="font-mono text-lg sm:text-xl text-rose-dark dark:text-rose-powder">{profile.subRole}</span>
+            {/* Sous-titre : couleur primaire unie, sans dégradé ni trait */}
+            <p className="section-subtitle mt-4 text-xl sm:text-2xl font-serif font-medium">
+              {profile.role} — {profile.subRole}
             </p>
 
             {/* Phrase d'accroche */}
@@ -83,12 +69,13 @@ export const Hero: React.FC = () => {
 
               <a
                 href={getAssetUrl(profile.cvPath)}
-                download="CV_Ikram_Raboudi_PFE.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-3 text-sm text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-400 font-mono transition-colors"
-                title="Télécharger le CV au format PDF"
+                title="Consulter le CV au format PDF"
               >
-                <FileDown className="w-4 h-4 text-denim-500" />
-                <span className="underline underline-offset-4">CV</span>
+                <Eye className="w-4 h-4 text-denim-500" />
+                <span className="underline underline-offset-4">Consulter mon CV</span>
               </a>
             </div>
 
@@ -118,55 +105,67 @@ export const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Colonne Droite : Photo détourée & Pastilles flottantes */}
+          {/* Colonne Droite : Grand avatar 3D Pixar & 3 cartes flottantes */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
-            <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]">
-              {/* Forme en arche douce / Conteneur photo selon consigne section 3 */}
-              {/* Mode Clair : arche douce avec fond rose poudré/denim clair et mix-blend-mode: multiply */}
-              {/* Mode Sombre : carte ivoire arrondie avec cadre soigné */}
-              <div className="relative rounded-t-[120px] rounded-b-[36px] overflow-hidden border-2 border-line-light dark:border-line-dark shadow-soft-lg bg-gradient-to-b from-rose-soft/80 via-denim-50 to-surface-softLight dark:from-[#FAF7F2] dark:via-[#F3EEE7] dark:to-[#EAE3D9] p-3 pt-6 transition-all">
-                <div className="relative rounded-t-[110px] rounded-b-[28px] overflow-hidden flex items-end justify-center">
+            <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[420px]">
+              {/* Grand cadre arrondi (arche douce) avec dégradé rose poudré → ivoire */}
+              <div className="relative rounded-t-[140px] rounded-b-[40px] overflow-hidden border-2 border-line-light/90 dark:border-line-dark shadow-soft-lg bg-gradient-to-b from-rose-soft/80 via-surface-softLight/60 to-bg-light dark:from-denim-900/60 dark:via-surface-dark dark:to-bg-dark p-3 pt-6 transition-all">
+                <div className="relative rounded-t-[130px] rounded-b-[32px] overflow-hidden flex items-end justify-center">
                   <img
-                    src={getAssetUrl(profile.photoPath)}
-                    alt="Portrait professionnel d'Ikram Raboudi"
-                    width={864}
-                    height={1184}
+                    src={getAssetUrl('assets/avatar.jpg')}
+                    alt="Avatar 3D d'Ikram Raboudi"
+                    width={1536}
+                    height={2744}
                     loading="eager"
-                    className="w-full h-auto object-contain max-h-[460px] select-none transition-all duration-300 mix-blend-multiply dark:mix-blend-normal"
-                    style={{ aspectRatio: '864 / 1184' }}
+                    className="w-full h-auto object-cover object-top max-h-[460px] sm:max-h-[500px] select-none transition-transform duration-300 hover:scale-[1.01]"
+                    style={{
+                      maskImage: 'linear-gradient(to bottom, black 72%, transparent 98%)',
+                      WebkitMaskImage: 'linear-gradient(to bottom, black 72%, transparent 98%)',
+                    }}
+                  />
+
+                  {/* Voile dégradé doux pour fondre harmonieusement le bas de l'avatar */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-bg-light/90 via-bg-light/40 to-transparent dark:from-bg-dark/95 dark:via-bg-dark/40 pointer-events-none"
+                    aria-hidden="true"
                   />
                 </div>
               </div>
 
-              {/* Pastille Flottante 1 : Flutter */}
+              {/* Carte Flottante 1 : 6 projets réalisés */}
               <div
                 className="absolute -top-3 -left-3 sm:-left-6 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float"
               >
-                <TechLogo slug="flutter" name="Flutter" className="w-5 h-5" />
+                <div className="p-1 rounded-lg bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300">
+                  <FolderGit2 className="w-4 h-4" />
+                </div>
                 <span className="text-xs font-semibold text-content-mainLight dark:text-content-mainDark">
-                  Flutter
+                  6 projets réalisés
                 </span>
               </div>
 
-              {/* Pastille Flottante 2 : Symfony */}
+              {/* Carte Flottante 2 : Flutter · Symfony · Go */}
               <div
-                className="absolute top-1/2 -right-4 sm:-right-8 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-delayed"
+                className="absolute top-1/2 -right-4 sm:-right-8 z-20 flex items-center gap-2 px-3.5 py-2.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-delayed"
               >
-                <TechLogo slug="symfony" name="Symfony" className="w-5 h-5" invertDark />
+                <div className="flex items-center gap-1.5">
+                  <TechLogo slug="flutter" name="Flutter" className="w-4 h-4" />
+                  <TechLogo slug="symfony" name="Symfony" className="w-4 h-4" invertDark />
+                  <TechLogo slug="go" name="Go" className="w-4 h-4" />
+                </div>
                 <span className="text-xs font-semibold text-content-mainLight dark:text-content-mainDark">
-                  Symfony
+                  Flutter · Symfony · Go
                 </span>
               </div>
 
-              {/* Pastille Flottante 3 : Go */}
+              {/* Carte Flottante 3 : 🟢 PFE · Fév → Mai 2027 */}
               <div
-                className="absolute -bottom-3 left-6 sm:left-10 z-20 flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-slow"
+                className="absolute -bottom-3 left-4 sm:left-8 z-20 flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-slow"
               >
-                <TechLogo slug="go" name="Go" className="w-5 h-5" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-xs font-semibold text-content-mainLight dark:text-content-mainDark">
-                  Go (Fiber)
+                  PFE · Fév → Mai 2027
                 </span>
-                <Sparkles className="w-3 h-3 text-rose-powder fill-rose-powder" />
               </div>
             </div>
           </div>

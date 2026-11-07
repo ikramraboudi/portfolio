@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X, FileDown, Send, Linkedin, Github } from 'lucide-react';
+import { Sun, Moon, Menu, X, Eye, Send, Linkedin, Github } from 'lucide-react';
 import { useScrollSpy } from '../../hooks/useScrollSpy';
 import { getAssetUrl } from '../../utils/paths';
 import { profile } from '../../data/profile';
@@ -109,14 +109,16 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
             {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-300" /> : <Moon className="w-5 h-5 text-denim-600" />}
           </button>
 
-          {/* Bouton Télécharger CV */}
+          {/* Bouton Consulter CV */}
           <a
             href={getAssetUrl(profile.cvPath)}
-            download="CV_Ikram_Raboudi_PFE.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-mainLight dark:text-content-mainDark hover:bg-surface-softLight dark:hover:bg-surface-softDark transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
+            title="Consulter mon CV (PDF)"
           >
-            <FileDown className="w-4 h-4 text-denim-600 dark:text-denim-400" />
-            <span>Mon CV</span>
+            <Eye className="w-4 h-4 text-denim-600 dark:text-denim-400" />
+            <span>Consulter mon CV</span>
           </a>
 
           {/* Bouton Me Contacter */}
@@ -179,12 +181,13 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           <div className="mt-6 pt-4 border-t border-line-light dark:border-line-dark flex flex-col gap-2.5">
             <a
               href={getAssetUrl(profile.cvPath)}
-              download="CV_Ikram_Raboudi_PFE.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-mainLight dark:text-content-mainDark"
             >
-              <FileDown className="w-4 h-4 text-denim-600 dark:text-denim-400" />
-              <span>Télécharger mon CV (PDF)</span>
+              <Eye className="w-4 h-4 text-denim-600 dark:text-denim-400" />
+              <span>Consulter mon CV</span>
             </a>
             <a
               href="#contact"

@@ -14,10 +14,9 @@ export const Skills: React.FC = () => {
   return (
     <section id="competences" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
-        eyebrow="COMPÉTENCES TECHNIQUES"
-        title="Technologies & outils"
-        highlight="maîtrisés"
-        description="Une boîte à outils moderne et polyvalente, éprouvée sur des applications mobiles, des plateformes web et des systèmes distribués."
+        emoji="🛠️"
+        title="Compétences"
+        subtitle="Technologies, langages et outils maîtrisés pour concevoir des applications web et mobiles complètes."
       />
 
       {/* Filtres par catégorie */}

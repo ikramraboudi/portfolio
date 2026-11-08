@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { RotateCcw, ArrowRight } from 'lucide-react';
 import { askOptions, AskOption } from '../../data/askAnswers';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface ChatMessage {
   id: string;
@@ -12,27 +13,36 @@ interface ChatMessage {
   };
 }
 
-const INITIAL_MESSAGE = 'Salut 👋 Je suis Ikram. Que veux-tu savoir sur moi ?';
-
 export const AskIkram: React.FC = () => {
+  const { lang, t } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [typedWelcome, setTypedWelcome] = useState('');
   const [usedOptionIds, setUsedOptionIds] = useState<Set<string>>(new Set());
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Effet de frappe initial
+  const initialMsg = t.askIkram.initialMessage;
+
+  // Effet de frappe initial (se réactive si la langue change)
   useEffect(() => {
     let index = 0;
+    setTypedWelcome('');
     const interval = setInterval(() => {
       index++;
-      setTypedWelcome(INITIAL_MESSAGE.slice(0, index));
-      if (index >= INITIAL_MESSAGE.length) {
+      setTypedWelcome(initialMsg.slice(0, index));
+      if (index >= initialMsg.length) {
         clearInterval(interval);
       }
-    }, 28);
+    }, 25);
     return () => clearInterval(interval);
-  }, []);
+  }, [initialMsg]);
+
+  // Réinitialiser les messages quand la langue change pour cohérence
+  useEffect(() => {
+    setMessages([]);
+    setUsedOptionIds(new Set());
+    setIsTyping(false);
+  }, [lang]);
 
   // Défilement automatique vers le bas à chaque nouveau message
   const scrollToBottom = () => {
@@ -54,7 +64,7 @@ export const AskIkram: React.FC = () => {
     const userMsg: ChatMessage = {
       id: `user-${Date.now()}`,
       sender: 'user',
-      text: option.question,
+      text: option.question[lang],
     };
 
     setMessages(prev => [...prev, userMsg]);
@@ -65,8 +75,13 @@ export const AskIkram: React.FC = () => {
       const ikramMsg: ChatMessage = {
         id: `ikram-${Date.now()}`,
         sender: 'ikram',
-        text: option.answer,
-        actionButton: option.actionButton,
+        text: option.answer[lang],
+        actionButton: option.actionButton
+          ? {
+              label: option.actionButton.label[lang],
+              href: option.actionButton.href,
+            }
+          : undefined,
       };
       setMessages(prev => [...prev, ikramMsg]);
       setIsTyping(false);
@@ -110,7 +125,7 @@ export const AskIkram: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="truncate">Disponible pour un PFE</span>
+                  <span className="truncate">{t.askIkram.phoneAvailability}</span>
                 </div>
               </div>
             </div>
@@ -119,8 +134,8 @@ export const AskIkram: React.FC = () => {
             <button
               type="button"
               onClick={handleReset}
-              title="Réinitialiser la conversation"
-              aria-label="Réinitialiser la conversation"
+              title={t.askIkram.resetTitle}
+              aria-label={t.askIkram.resetAria}
               className="p-1.5 rounded-lg border border-line-light/80 dark:border-line-dark/80 text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-300 hover:bg-surface-softLight dark:hover:bg-surface-softDark transition-colors shrink-0"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -136,7 +151,7 @@ export const AskIkram: React.FC = () => {
             <div className="flex items-start gap-2 max-w-[88%]">
               <div className="p-3 rounded-2xl rounded-tl-sm bg-surface-light dark:bg-surface-dark border border-line-light/80 dark:border-line-dark/80 text-content-mainLight dark:text-content-mainDark shadow-sm leading-relaxed">
                 {typedWelcome}
-                {typedWelcome.length < INITIAL_MESSAGE.length && (
+                {typedWelcome.length < initialMsg.length && (
                   <span className="inline-block w-1.5 h-3 ml-0.5 bg-denim-500 animate-pulse" />
                 )}
               </div>
@@ -191,7 +206,7 @@ export const AskIkram: React.FC = () => {
           <div className="p-3 bg-surface-light/95 dark:bg-surface-dark/95 border-t border-line-light/70 dark:border-line-dark/70 shrink-0">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[10px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
-                Questions rapides :
+                {t.askIkram.quickQuestionsLabel}
               </span>
               {usedOptionIds.size > 0 && (
                 <button
@@ -199,7 +214,7 @@ export const AskIkram: React.FC = () => {
                   onClick={handleReset}
                   className="text-[11px] text-denim-600 dark:text-denim-400 hover:underline font-mono"
                 >
-                  Recommencer
+                  {t.askIkram.resetBtn}
                 </button>
               )}
             </div>
@@ -219,7 +234,7 @@ export const AskIkram: React.FC = () => {
                         : 'bg-surface-softLight dark:bg-surface-softDark text-content-mainLight dark:text-content-mainDark border border-line-light dark:border-line-dark hover:border-denim-400 hover:text-denim-600 dark:hover:text-denim-300 hover:scale-[1.03] active:scale-95 shadow-2xs'
                     }`}
                   >
-                    {option.label}
+                    {option.label[lang]}
                   </button>
                 );
               })}

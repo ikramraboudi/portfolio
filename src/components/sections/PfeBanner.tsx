@@ -1,9 +1,10 @@
 import React from 'react';
 import { Send, Eye, CheckCircle, Clock, MapPin } from 'lucide-react';
-import { profile } from '../../data/profile';
-import { getAssetUrl } from '../../utils/paths';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 export const PfeBanner: React.FC = () => {
+  const { t, getCvUrl } = useLanguage();
+
   return (
     <section id="stage-pfe" className="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="relative rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-navy via-navy to-navy-deep text-navy-text p-8 sm:p-10 md:p-14 shadow-soft-lg border border-white/10">
@@ -22,30 +23,30 @@ export const PfeBanner: React.FC = () => {
             {/* Titre officiel de section avec emoji */}
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-navy-text leading-tight flex items-center gap-3 mb-3">
               <span className="text-3xl sm:text-4xl lg:text-5xl select-none" aria-hidden="true">🎯</span>
-              <span>Stage PFE</span>
+              <span>{t.pfeBanner.title}</span>
             </h2>
 
             <p className="text-base sm:text-lg md:text-xl text-navy-text font-medium leading-relaxed mb-4">
-              Disponible de février à mai 2027 pour concevoir des applications web et mobiles innovantes.
+              {t.pfeBanner.subtitle}
             </p>
 
             <p className="text-sm sm:text-base text-navy-muted leading-relaxed">
-              Prête à m'investir pleinement au sein de votre équipe pour concevoir des applications web & mobiles complètes (Flutter, Symfony, Go) avec rigueur, autonomie et méthodologie Agile.
+              {t.pfeBanner.description}
             </p>
 
             {/* Points d'engagement */}
             <div className="mt-6 flex flex-wrap gap-y-2 gap-x-6 text-xs sm:text-sm text-navy-text font-medium">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4 text-navy-accent" />
-                <span>Réponse garantie sous 24 h</span>
+                <span>{t.pfeBanner.guarantee}</span>
               </span>
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-navy-accent" />
-                <span>Lieu : à discuter (Tunisie)</span>
+                <span>{t.pfeBanner.location}</span>
               </span>
               <span className="flex items-center gap-1.5">
                 <CheckCircle className="w-4 h-4 text-navy-accent" />
-                <span>3e année Licence DSI (ISET Kélibia)</span>
+                <span>{t.pfeBanner.degree}</span>
               </span>
             </div>
           </div>
@@ -56,19 +57,19 @@ export const PfeBanner: React.FC = () => {
               href="#contact"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-rose-powder hover:bg-rose-soft text-navy font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
             >
-              <span>Me contacter pour un PFE</span>
+              <span>{t.pfeBanner.ctaContact}</span>
               <Send className="w-4 h-4 text-navy" />
             </a>
 
             <a
-              href={getAssetUrl(profile.cvPath)}
+              href={getCvUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full border border-navy-text/40 bg-white/5 hover:bg-white/15 text-navy-text font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95 backdrop-blur-sm"
-              title="Consulter mon CV (PDF)"
+              title={`${t.pfeBanner.ctaCv} (PDF)`}
             >
               <Eye className="w-4 h-4 text-navy-accent" />
-              <span>Consulter mon CV</span>
+              <span>{t.pfeBanner.ctaCv}</span>
             </a>
           </div>
         </div>

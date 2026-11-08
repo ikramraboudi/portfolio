@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FolderGit2, Smartphone, Cpu, Briefcase } from 'lucide-react';
 import { profile } from '../../data/profile';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface StatCardProps {
   icon: React.ReactNode;
@@ -66,6 +67,8 @@ const StatCard: React.FC<StatCardProps> = ({ icon, value, suffix = '', label, su
 };
 
 export const StatsBar: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Bandeau BLEU MARINE avec coins adoucis (28px) et ombre délicate */}
@@ -84,27 +87,27 @@ export const StatsBar: React.FC = () => {
           <StatCard
             icon={<FolderGit2 className="w-6 h-6" />}
             value={profile.stats.projectsCount}
-            label="Projets réalisés"
-            subtitle="Web, Mobile & Desktop"
+            label={t.stats.projectsCountLabel}
+            subtitle={t.stats.projectsCountSub}
           />
           <StatCard
             icon={<Smartphone className="w-6 h-6" />}
             value={profile.stats.mobileAppsCount}
-            label="Apps mobiles Flutter"
-            subtitle="Klitchi & Coranique"
+            label={t.stats.mobileAppsLabel}
+            subtitle={t.stats.mobileAppsSub}
           />
           <StatCard
             icon={<Cpu className="w-6 h-6" />}
             value={20}
             suffix="+"
-            label="Technologies"
-            subtitle="Front, Back & Données"
+            label={t.stats.techCountLabel}
+            subtitle={t.stats.techCountSub}
           />
           <StatCard
             icon={<Briefcase className="w-6 h-6" />}
             value={profile.stats.internshipsCount}
-            label="Stages accomplis"
-            subtitle="After Code & Code Temple"
+            label={t.stats.internshipsLabel}
+            subtitle={t.stats.internshipsSub}
           />
         </div>
       </div>

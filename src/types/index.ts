@@ -1,22 +1,24 @@
+import { Localized } from '../i18n/types';
+
 export type ProjectCategory = 'Mobile' | 'Web' | 'Desktop' | 'Web & Mobile';
 
 export interface ProjectRepo {
   label: string;
   url: string;
-  role?: string;
+  role?: Localized<string>;
 }
 
 export interface Project {
   id: string;
   title: string;
-  subtitle?: string;
+  subtitle?: Localized<string>;
   category: ProjectCategory;
-  contextTag: string; // e.g. "Stage After Code · Janvier 2026"
+  contextTag: Localized<string>;
   image: string;
-  description: string;
+  description: Localized<string>;
   technologies: {
     name: string;
-    logoSlug: string; // matches /logos/<slug>.svg
+    logoSlug: string;
   }[];
   githubUrl: string;
   additionalRepos?: ProjectRepo[];
@@ -29,39 +31,39 @@ export interface SkillItem {
 }
 
 export interface SkillCategory {
-  title: string;
-  description?: string;
+  title: Localized<string>;
+  description?: Localized<string>;
   skills: SkillItem[];
 }
 
 export interface ExperienceItem {
   id: string;
-  title: string;
+  title: Localized<string>;
   companyOrOrg: string;
-  location: string;
-  period: string;
+  location: Localized<string>;
+  period: Localized<string>;
   type: 'experience' | 'education' | 'certification' | 'association';
-  badge?: string;
-  highlights: string[];
+  badge?: Localized<string>;
+  highlights: Localized<string[]>;
 }
 
 export interface ProfileData {
   name: string;
-  role: string;
+  role: Localized<string>;
   subRole: string;
-  tagline: string;
-  bio: string;
-  bioParagraph1: string;
-  bioParagraph2: string;
+  tagline: Localized<string>;
+  bio: Localized<string>;
+  bioParagraph1: Localized<string>;
+  bioParagraph2: Localized<string>;
   email: string;
   phone: string;
   displayPhone: string;
-  location: string;
+  location: Localized<string>;
   availability: {
-    status: string;
-    period: string;
-    target: string;
-    replyTime: string;
+    status: Localized<string>;
+    period: Localized<string>;
+    target: Localized<string>;
+    replyTime: Localized<string>;
   };
   socials: {
     github: string;
@@ -69,18 +71,22 @@ export interface ProfileData {
     linkedin: string;
     email: string;
   };
-  cvPath: string;
+  cvPath: {
+    fr: string;
+    en: string;
+  };
+  hasEnglishCV: boolean;
   photoPath: string;
   avatarPath: string;
   quickFacts: {
-    location: string;
-    education: string;
-    languages: string;
-    search: string;
+    location: Localized<string>;
+    education: Localized<string>;
+    languages: Localized<string>;
+    search: Localized<string>;
   };
   values: {
-    title: string;
-    description: string;
+    title: Localized<string>;
+    description: Localized<string>;
     icon: string;
   }[];
   stats: {

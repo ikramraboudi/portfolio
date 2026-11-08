@@ -2,8 +2,14 @@ import { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: 'Langages de programmation',
-    description: 'Langages compilés, interprétés et typés pour le web, le mobile et les systèmes.',
+    title: {
+      fr: 'Langages de programmation',
+      en: 'Programming Languages',
+    },
+    description: {
+      fr: 'Langages compilés, interprétés et typés pour le web, le mobile et les systèmes.',
+      en: 'Compiled, interpreted and strongly-typed languages for web, mobile and system engineering.',
+    },
     skills: [
       { name: 'HTML5', slug: 'html5' },
       { name: 'CSS3', slug: 'css3' },
@@ -19,8 +25,14 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Frameworks & Bibliothèques',
-    description: 'Architectures modernes pour interfaces réactives, applications mobiles et API robustes.',
+    title: {
+      fr: 'Frameworks & Bibliothèques',
+      en: 'Frameworks & Libraries',
+    },
+    description: {
+      fr: 'Architectures modernes pour interfaces réactives, applications mobiles et API robustes.',
+      en: 'Modern architectures for reactive user interfaces, mobile applications and resilient APIs.',
+    },
     skills: [
       { name: 'Flutter', slug: 'flutter' },
       { name: 'Symfony', slug: 'symfony', invertDark: true },
@@ -35,8 +47,14 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Bases de données & ORM',
-    description: 'Modélisation relationnelle et NoSQL, persistance et requêtes optimisées.',
+    title: {
+      fr: 'Bases de données & ORM',
+      en: 'Databases & ORMs',
+    },
+    description: {
+      fr: 'Modélisation relationnelle et NoSQL, persistance et requêtes optimisées.',
+      en: 'Relational and NoSQL modeling, persistence layers and query optimization.',
+    },
     skills: [
       { name: 'PostgreSQL', slug: 'postgresql' },
       { name: 'MySQL', slug: 'mysql' },
@@ -46,8 +64,14 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Outils, Temps réel & Méthodologies',
-    description: 'Protocoles de communication, authentification, versioning et pratiques agiles.',
+    title: {
+      fr: 'Outils, Temps réel & Méthodologies',
+      en: 'Tools, Real-time & Methodologies',
+    },
+    description: {
+      fr: 'Protocoles de communication, authentification, versioning et pratiques agiles.',
+      en: 'Communication protocols, authentication, version control and agile practices.',
+    },
     skills: [
       { name: 'Firebase', slug: 'firebase' },
       { name: 'WebSockets', slug: 'websocket' },
@@ -60,8 +84,14 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    title: 'Réseaux & Design UI/UX',
-    description: 'Fondations réseaux, protocoles de communication et conception centrée utilisateur.',
+    title: {
+      fr: 'Réseaux & Design UI/UX',
+      en: 'Networking & UI/UX Design',
+    },
+    description: {
+      fr: 'Fondations réseaux, protocoles de communication et conception centrée utilisateur.',
+      en: 'Networking fundamentals, communication protocols and human-centered design.',
+    },
     skills: [
       { name: 'Cisco Networking', slug: 'cisco' },
       { name: 'UX/UI Design', slug: 'uxui' },

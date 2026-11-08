@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, GraduationCap, Globe, Target, Users, MessageSquare, CheckSquare, Sparkles, Linkedin } from 'lucide-react';
 import { profile } from '../../data/profile';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { SectionHeading } from '../common/SectionHeading';
 import { AskIkram } from './AskIkram';
 
@@ -12,12 +13,14 @@ const valueIcons: Record<string, React.ReactNode> = {
 };
 
 export const About: React.FC = () => {
+  const { lang, t } = useLanguage();
+
   return (
     <section id="a-propos" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         emoji="👋"
-        title="À propos"
-        subtitle="Découvrez mon parcours, ma vision du développement et mes motivations professionnelles."
+        title={t.about.sectionTitle}
+        subtitle={t.about.sectionSubtitle}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
@@ -26,17 +29,17 @@ export const About: React.FC = () => {
           {/* Carte de présentation principale */}
           <div className="p-6 sm:p-8 rounded-3xl bg-surface-light dark:bg-surface-dark border border-line-light dark:border-line-dark shadow-soft">
             <h3 className="font-serif text-xl sm:text-2xl font-semibold text-content-mainLight dark:text-content-mainDark mb-4">
-              Mon profil & mes motivations
+              {t.about.cardTitle}
             </h3>
 
             {/* Paragraphe 1 exact */}
             <p className="text-base sm:text-lg text-content-secLight dark:text-content-secDark leading-relaxed mb-5">
-              {profile.bioParagraph1}
+              {profile.bioParagraph1[lang]}
             </p>
 
             {/* Paragraphe 2 exact (légèrement mis en valeur) */}
             <div className="p-4 sm:p-5 rounded-2xl bg-surface-softLight/70 dark:bg-surface-softDark/70 border-l-4 border-denim-500 text-content-mainLight dark:text-content-mainDark text-sm sm:text-base font-medium leading-relaxed mb-6">
-              {profile.bioParagraph2}
+              {profile.bioParagraph2[lang]}
             </div>
 
             <div className="pt-4 border-t border-line-light/60 dark:border-line-dark/60 flex items-center justify-between flex-wrap gap-3">
@@ -47,10 +50,10 @@ export const About: React.FC = () => {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 hover:bg-denim-100 dark:hover:bg-denim-900/60 transition-colors border border-denim-200/60 dark:border-denim-700/60"
               >
                 <Linkedin className="w-4 h-4 text-denim-600 dark:text-denim-400" />
-                <span>Consulter mon profil LinkedIn</span>
+                <span>{t.about.viewLinkedIn}</span>
               </a>
               <span className="text-xs font-mono text-content-secLight dark:text-content-secDark">
-                Licence DSI · ISET Kélibia
+                {t.about.institutionTag}
               </span>
             </div>
           </div>
@@ -63,10 +66,10 @@ export const About: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
-                  Localisation
+                  {t.about.quickFacts.locationLabel}
                 </span>
                 <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark">
-                  {profile.quickFacts.location}
+                  {profile.quickFacts.location[lang]}
                 </span>
               </div>
             </div>
@@ -77,10 +80,10 @@ export const About: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
-                  Formation
+                  {t.about.quickFacts.educationLabel}
                 </span>
                 <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark">
-                  Licence DSI — ISET Kélibia
+                  {profile.quickFacts.education[lang]}
                 </span>
               </div>
             </div>
@@ -91,10 +94,10 @@ export const About: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
-                  Langues
+                  {t.about.quickFacts.languagesLabel}
                 </span>
                 <span className="text-xs font-semibold text-content-mainLight dark:text-content-mainDark">
-                  {profile.quickFacts.languages}
+                  {profile.quickFacts.languages[lang]}
                 </span>
               </div>
             </div>
@@ -105,10 +108,10 @@ export const About: React.FC = () => {
               </div>
               <div className="flex flex-col">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
-                  Objectif
+                  {t.about.quickFacts.targetLabel}
                 </span>
                 <span className="text-xs font-bold text-denim-600 dark:text-denim-300">
-                  {profile.quickFacts.search}
+                  {profile.quickFacts.search[lang]}
                 </span>
               </div>
             </div>
@@ -117,7 +120,7 @@ export const About: React.FC = () => {
           {/* 4 Valeurs & Qualités */}
           <div className="p-6 rounded-3xl bg-surface-light dark:bg-surface-dark border border-line-light dark:border-line-dark shadow-soft">
             <h4 className="font-serif text-lg font-semibold text-content-mainLight dark:text-content-mainDark mb-4">
-              Valeurs & Qualités clés
+              {t.about.valuesTitle}
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {profile.values.map((val, idx) => (
@@ -127,10 +130,10 @@ export const About: React.FC = () => {
                 >
                   <div className="flex items-center gap-2 mb-1.5 text-denim-600 dark:text-denim-400 font-semibold text-sm">
                     {valueIcons[val.icon] || <Sparkles className="w-4 h-4" />}
-                    <span>{val.title}</span>
+                    <span>{val.title[lang]}</span>
                   </div>
                   <p className="text-xs text-content-secLight dark:text-content-secDark leading-relaxed">
-                    {val.description}
+                    {val.description[lang]}
                   </p>
                 </div>
               ))}
@@ -142,10 +145,10 @@ export const About: React.FC = () => {
         <div className="lg:col-span-5 flex flex-col items-center">
           <div className="mb-3 text-center">
             <span className="text-xs font-mono uppercase tracking-wider text-denim-600 dark:text-denim-400 font-semibold">
-              Simulation mobile interactive
+              {t.about.simulationBadge}
             </span>
             <p className="text-xs text-content-secLight dark:text-content-secDark mt-0.5">
-              Posez une question pour en savoir plus sur mon profil
+              {t.about.simulationSubtitle}
             </p>
           </div>
           <AskIkram />

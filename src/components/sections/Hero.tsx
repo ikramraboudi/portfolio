@@ -1,10 +1,13 @@
 import React from 'react';
-import { ArrowRight, Send, Eye, Github, Linkedin, Sparkles } from 'lucide-react';
+import { ArrowRight, Send, Eye, Github, Linkedin } from 'lucide-react';
 import { profile } from '../../data/profile';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { getAssetUrl } from '../../utils/paths';
 import { TechLogo } from '../common/TechLogo';
 
 export const Hero: React.FC = () => {
+  const { lang, t, getCvUrl } = useLanguage();
+
   return (
     <section
       id="accueil"
@@ -27,13 +30,14 @@ export const Hero: React.FC = () => {
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sage-badge" />
               </span>
               <span>
-                {profile.availability.status} · <span className="font-semibold">{profile.availability.period}</span>
+                {profile.availability.status[lang]} ·{' '}
+                <span className="font-semibold">{profile.availability.period[lang]}</span>
               </span>
             </div>
 
             {/* Titre principal */}
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-content-mainLight dark:text-content-mainDark leading-[1.15]">
-              Bonjour, je suis{' '}
+              {t.hero.greeting}{' '}
               <span className="text-denim-600 dark:text-denim-400">
                 {profile.name}
               </span>
@@ -41,12 +45,12 @@ export const Hero: React.FC = () => {
 
             {/* Sous-titre : couleur primaire unie, sans dégradé ni trait */}
             <p className="section-subtitle mt-4 text-xl sm:text-2xl font-serif font-medium">
-              {profile.role} — {profile.subRole}
+              {profile.role[lang]} — {profile.subRole}
             </p>
 
             {/* Phrase d'accroche */}
             <p className="mt-5 text-base sm:text-lg text-content-secLight dark:text-content-secDark leading-relaxed max-w-xl">
-              {profile.tagline}
+              {profile.tagline[lang]}
             </p>
 
             {/* Boutons d'appel à l'action */}
@@ -55,7 +59,7 @@ export const Hero: React.FC = () => {
                 href="#projets"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-navy hover:bg-navy-card text-navy-text font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 active:scale-95 shadow-soft hover:shadow-soft-lg"
               >
-                <span>Voir mes projets</span>
+                <span>{t.hero.ctaProjects}</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
 
@@ -63,31 +67,31 @@ export const Hero: React.FC = () => {
                 href="#contact"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-mainLight dark:text-content-mainDark hover:bg-surface-softLight dark:hover:bg-surface-softDark font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
               >
-                <span>Me contacter</span>
+                <span>{t.hero.ctaContact}</span>
                 <Send className="w-4 h-4 text-denim-500" />
               </a>
 
               <a
-                href={getAssetUrl(profile.cvPath)}
+                href={getCvUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-3 text-sm text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-400 font-mono transition-colors"
-                title="Consulter le CV au format PDF"
+                title={t.hero.ctaCvTitle}
               >
                 <Eye className="w-4 h-4 text-denim-500" />
-                <span className="hover:underline">CV</span>
+                <span className="hover:underline">{t.hero.ctaCv}</span>
               </a>
             </div>
 
             {/* Liens réseaux sociaux */}
             <div className="mt-8 pt-6 border-t border-line-light/80 dark:border-line-dark/80 w-full max-w-lg flex items-center gap-4 text-content-secLight dark:text-content-secDark text-sm">
-              <span className="font-mono text-xs uppercase tracking-wider">Réseaux :</span>
+              <span className="font-mono text-xs uppercase tracking-wider">{t.hero.networksLabel}</span>
               <div className="flex items-center gap-2.5">
                 <a
                   href={profile.socials.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Profil GitHub"
+                  aria-label={t.hero.githubAria}
                   className="p-2 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark hover:text-denim-600 dark:hover:text-denim-300 hover:scale-110 transition-all shadow-sm"
                 >
                   <Github className="w-4 h-4" />
@@ -96,7 +100,7 @@ export const Hero: React.FC = () => {
                   href={profile.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Profil LinkedIn"
+                  aria-label={t.hero.linkedinAria}
                   className="p-2 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark hover:text-denim-600 dark:hover:text-denim-300 hover:scale-110 transition-all shadow-sm"
                 >
                   <Linkedin className="w-4 h-4" />
@@ -123,7 +127,7 @@ export const Hero: React.FC = () => {
                 <div className="relative rounded-t-[110px] rounded-b-[28px] overflow-hidden flex items-end justify-center">
                   <img
                     src={getAssetUrl(profile.photoPath)}
-                    alt="Portrait professionnel d'Ikram Raboudi"
+                    alt={t.hero.photoAlt}
                     width={864}
                     height={1184}
                     loading="eager"
@@ -161,7 +165,6 @@ export const Hero: React.FC = () => {
                 <span className="text-xs font-semibold text-content-mainLight dark:text-content-mainDark">
                   Go (Fiber)
                 </span>
-                <Sparkles className="w-3 h-3 text-rose-powder fill-rose-powder" />
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTheme } from './hooks/useTheme';
+import { LanguageProvider } from './i18n/LanguageContext';
 import { ScrollProgress } from './components/layout/ScrollProgress';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -12,7 +13,7 @@ import { Experience } from './components/sections/Experience';
 import { PfeBanner } from './components/sections/PfeBanner';
 import { Contact } from './components/sections/Contact';
 
-export const App: React.FC = () => {
+const PortfolioContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
   // Mise à jour des balises Open Graph et canonical selon VITE_SITE_URL (sans faux domaine)
@@ -70,6 +71,14 @@ export const App: React.FC = () => {
       {/* Pied de page */}
       <Footer />
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <LanguageProvider>
+      <PortfolioContent />
+    </LanguageProvider>
   );
 };
 

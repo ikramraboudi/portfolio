@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink, Github, ZoomIn } from 'lucide-react';
 import { Project } from '../../types';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { getAssetUrl } from '../../utils/paths';
 import { TechLogo } from '../common/TechLogo';
 
@@ -10,6 +11,7 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbox }) => {
+  const { lang, t } = useLanguage();
   const isKlitchi = project.id === 'klitchi';
 
   const handleCardClick = (e: React.MouseEvent) => {
@@ -30,7 +32,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
       <div className="relative w-full h-56 sm:h-64 bg-surface-softLight/60 dark:bg-surface-softDark/60 p-4 sm:p-5 flex items-center justify-center overflow-hidden border-b border-line-light/60 dark:border-line-dark/60">
         <img
           src={getAssetUrl(project.image)}
-          alt={`Capture d'écran du projet ${project.title}`}
+          alt={t.projects.zoomAria.replace('{title}', project.title)}
           loading="lazy"
           className="max-h-full max-w-full object-contain rounded-xl drop-shadow-sm group-hover:scale-[1.02] transition-transform duration-300"
         />
@@ -42,9 +44,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
             e.stopPropagation();
             onOpenLightbox(project);
           }}
-          aria-label={`Agrandir la capture de ${project.title}`}
+          aria-label={t.projects.zoomAria.replace('{title}', project.title)}
           className="absolute top-3 right-3 p-2 rounded-xl bg-surface-light/90 dark:bg-surface-dark/90 text-content-secLight dark:text-content-secDark hover:text-content-mainLight dark:hover:text-content-mainDark border border-line-light/80 dark:border-line-dark/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-sm"
-          title="Agrandir la capture"
+          title={t.projects.zoomTitle}
         >
           <ZoomIn className="w-4 h-4" />
         </button>
@@ -62,7 +64,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
         <div>
           {/* Tag de contexte */}
           <span className="text-[11px] font-mono text-content-secLight/80 dark:text-content-secDark/80">
-            {project.contextTag}
+            {project.contextTag[lang]}
           </span>
 
           {/* Titre & Sous-titre */}
@@ -72,13 +74,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
           </h3>
           {project.subtitle && (
             <p className="section-subtitle text-xs font-medium mt-0.5">
-              {project.subtitle}
+              {project.subtitle[lang]}
             </p>
           )}
 
           {/* Description */}
           <p className="text-xs sm:text-sm text-content-secLight dark:text-content-secDark mt-3 line-clamp-3 leading-relaxed">
-            {project.description}
+            {project.description[lang]}
           </p>
 
           {/* Badges des technologies */}
@@ -100,7 +102,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
           {isKlitchi && project.additionalRepos ? (
             <div className="flex flex-col gap-2">
               <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                4 Dépôts GitHub interconnectés :
+                {t.projects.reposInterconnected}
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                 {project.additionalRepos.map(repo => (
@@ -109,7 +111,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
                     href={repo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    title={`${repo.label} : ${repo.role}`}
+                    title={`${repo.label}${repo.role ? ` : ${repo.role[lang]}` : ''}`}
                     className="inline-flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-denim-50 dark:bg-denim-900/30 text-denim-700 dark:text-denim-300 hover:bg-denim-100 dark:hover:bg-denim-900/60 border border-denim-200/60 dark:border-denim-700/50 transition-colors"
                   >
                     <Github className="w-3 h-3" />
@@ -126,7 +128,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenLightbo
               className="inline-flex items-center gap-2 text-xs font-semibold text-denim-600 dark:text-denim-400 hover:text-denim-700 dark:hover:text-denim-300 transition-colors"
             >
               <Github className="w-4 h-4" />
-              <span>Voir le projet sur GitHub</span>
+              <span>{t.projects.viewOnGithub}</span>
               <ExternalLink className="w-3.5 h-3.5 ml-auto" />
             </a>
           )}

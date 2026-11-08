@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X, ExternalLink } from 'lucide-react';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface LightboxProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ export const Lightbox: React.FC<LightboxProps> = ({
   title,
   githubUrl,
 }) => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -42,7 +45,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Aperçu agrandi de ${title}`}
+      aria-label={imageAlt}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/80 backdrop-blur-md transition-opacity duration-300"
       onClick={onClose}
     >
@@ -63,7 +66,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-denim-600 dark:text-denim-300 bg-denim-50 dark:bg-denim-900/40 hover:bg-denim-100 rounded-lg transition-colors"
               >
-                <span>Dépôt GitHub</span>
+                <span>{t.projects.lightboxRepo}</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
@@ -71,7 +74,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
               type="button"
               onClick={onClose}
               className="p-1.5 rounded-lg text-content-secLight dark:text-content-secDark hover:text-content-mainLight dark:hover:text-content-mainDark hover:bg-surface-softLight dark:hover:bg-surface-softDark transition-colors"
-              aria-label="Fermer la vue agrandie"
+              aria-label={t.projects.lightboxCloseAria}
             >
               <X className="w-5 h-5" />
             </button>

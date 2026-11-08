@@ -78,8 +78,15 @@ npm run preview
 
 ### Remplacer ou mettre à jour les fichiers PDF et photos :
 - **Photo d'Ikram** : déposer la nouvelle image dans `public/assets/ikram.png`.
-- **CV au format PDF** : déposer le fichier dans `public/assets/docs/CV_Ikram_Raboudi_PFE.pdf`.
+- **CV au format PDF (Français)** : déposer le fichier dans `public/assets/docs/CV_Ikram_Raboudi_PFE.pdf`.
+- **CV au format PDF (Anglais)** : déposer le fichier `CV_Ikram_Raboudi_PFE_EN.pdf` dans `public/assets/docs/`, puis passer le drapeau `hasEnglishCV: true` dans `src/data/profile.ts`. Tant que ce drapeau est à `false`, la version anglaise du site ouvrira automatiquement le CV en français sans rupture de lien.
 - **Captures de projets** : dans `public/assets/projects/<nom_du_projet>.png`.
+
+### 🌍 Système Bilingue (Français / Anglais)
+- **Internationalisation légère intégrée** : système sans dépendance lourde (`src/i18n/LanguageContext.tsx`, `fr.ts`, `en.ts`).
+- **Bascule instantanée** : sélecteur « FR | EN » dans la barre de navigation et le menu mobile.
+- **Persistance locale** : le choix de la langue est mémorisé dans `localStorage` (avec repli gracieux).
+- **SEO & Réseaux sociaux dynamiques** : mise à jour automatique de `<html lang>`, `document.title`, `meta description`, Open Graph (`og:locale`, `og:title`, etc.) et JSON-LD `inLanguage`.
 
 ---
 

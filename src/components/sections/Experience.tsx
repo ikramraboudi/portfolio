@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Briefcase, GraduationCap, Award, Users, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 import { experiences } from '../../data/experience';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { SectionHeading } from '../common/SectionHeading';
 import { ExperienceItem } from '../../types';
 
 export const Experience: React.FC = () => {
+  const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'experience' | 'education' | 'association'>('all');
 
   const filteredItems =
@@ -30,22 +32,24 @@ export const Experience: React.FC = () => {
     }
   };
 
+  const tabs = [
+    { id: 'all', label: t.experience.tabAll },
+    { id: 'experience', label: t.experience.tabExperience },
+    { id: 'education', label: t.experience.tabEducation },
+    { id: 'association', label: t.experience.tabAssociation },
+  ];
+
   return (
     <section id="parcours" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         emoji="🎓"
-        title="Parcours"
-        subtitle="Expérience professionnelle, formation académique en DSI et engagements associatifs."
+        title={t.experience.sectionTitle}
+        subtitle={t.experience.sectionSubtitle}
       />
 
       {/* Onglets de filtrage */}
       <div className="flex flex-wrap items-center gap-2 mb-12">
-        {[
-          { id: 'all', label: 'Tout le parcours' },
-          { id: 'experience', label: 'Expérience professionnelle (Stages)' },
-          { id: 'education', label: 'Formation & Certifications' },
-          { id: 'association', label: 'Vie associative (Club T’SCAI)' },
-        ].map(tab => (
+        {tabs.map(tab => (
           <button
             key={tab.id}
             type="button"
@@ -73,23 +77,25 @@ export const Experience: React.FC = () => {
             {/* Contenu de la carte */}
             <div className="p-6 sm:p-7 rounded-3xl bg-surface-light dark:bg-surface-dark border border-line-light dark:border-line-dark shadow-soft hover:shadow-soft-lg transition-all duration-300">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span className="text-xs font-mono font-semibold text-denim-600 dark:text-denim-400 bg-denim-50 dark:bg-denim-900/30 px-3 py-1 rounded-full border border-denim-200/50 dark:border-denim-700/40">
-                  {item.badge}
-                </span>
+                {item.badge && (
+                  <span className="text-xs font-mono font-semibold text-denim-600 dark:text-denim-400 bg-denim-50 dark:bg-denim-900/30 px-3 py-1 rounded-full border border-denim-200/50 dark:border-denim-700/40">
+                    {item.badge[lang]}
+                  </span>
+                )}
                 <div className="flex items-center gap-3 text-xs text-content-secLight dark:text-content-secDark font-mono">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />
-                    <span>{item.period}</span>
+                    <span>{item.period[lang]}</span>
                   </span>
                   <span className="flex items-center gap-1">
                     <MapPin className="w-3.5 h-3.5" />
-                    <span>{item.location}</span>
+                    <span>{item.location[lang]}</span>
                   </span>
                 </div>
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-content-mainLight dark:text-content-mainDark mt-2">
-                {item.title}
+                {item.title[lang]}
               </h3>
 
               <h4 className="text-sm font-semibold text-denim-600 dark:text-denim-300 mt-0.5">
@@ -98,13 +104,10 @@ export const Experience: React.FC = () => {
 
               {/* Faits marquants */}
               <ul className="mt-4 space-y-2">
-                {item.highlights.map((point, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-2.5 text-xs sm:text-sm text-content-secLight dark:text-content-secDark leading-relaxed"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-sage-badge shrink-0 mt-0.5" />
-                    <span>{point}</span>
+                {item.highlights[lang].map((highlight, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-content-secLight dark:text-content-secDark leading-relaxed">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                    <span>{highlight}</span>
                   </li>
                 ))}
               </ul>

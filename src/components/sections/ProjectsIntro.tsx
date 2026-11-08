@@ -1,8 +1,11 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { getAssetUrl } from '../../utils/paths';
 
 export const ProjectsIntro: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <div className="mb-12 md:mb-16 p-6 sm:p-8 md:p-10 rounded-[2.5rem] bg-navy text-navy-text border border-white/10 shadow-soft-lg overflow-hidden transition-colors">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
@@ -11,26 +14,36 @@ export const ProjectsIntro: React.FC = () => {
           {/* Pastille (badge) */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold uppercase tracking-wider bg-navy-card/90 text-navy-accent border border-white/10 mb-3 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-navy-accent" />
-            <span>Portfolio Développement Web & Mobile</span>
+            <span>{t.projects.introBadge}</span>
           </div>
 
-          {/* Titre : Mes Projets */}
+          {/* Titre : Mes Projets / My Projects */}
           <div className="flex items-baseline gap-3 flex-wrap">
             <h3 className="font-serif italic text-3xl sm:text-4xl lg:text-5xl font-semibold text-navy-text tracking-tight leading-tight">
-              Mes Projets
+              {t.projects.introTitle}
             </h3>
             <span className="text-xs font-mono text-navy-muted">
-              (6 projets affichés)
+              {t.projects.introCount}
             </span>
           </div>
 
           {/* Carte arrondie avec fond marine card */}
           <div className="mt-5 p-4 sm:p-5 rounded-2xl bg-navy-card/80 border border-white/10 shadow-2xs w-full">
             <p className="text-sm sm:text-base text-navy-text leading-relaxed">
-              De l'interface à l'API : découvrez mes réalisations complètes en développement mobile (<strong className="text-white font-semibold">Flutter</strong>), web (<strong className="text-white font-semibold">Symfony</strong>, <strong className="text-white font-semibold">Django REST</strong>, <strong className="text-white font-semibold">Next.js</strong>) et application de bureau (<strong className="text-white font-semibold">JavaFX</strong>).
+              {t.projects.introDescBefore}
+              <strong className="text-white font-semibold">Flutter</strong>
+              {t.projects.introDescMid1}
+              <strong className="text-white font-semibold">Symfony</strong>
+              {t.projects.introDescMid2}
+              <strong className="text-white font-semibold">Django REST</strong>
+              {t.projects.introDescMid3}
+              <strong className="text-white font-semibold">Next.js</strong>
+              {t.projects.introDescMid4}
+              <strong className="text-white font-semibold">JavaFX</strong>
+              {t.projects.introDescAfter}
             </p>
             <p className="section-subtitle-navy text-xs sm:text-sm font-medium mt-3">
-              Chaque projet présente une capture, les technologies utilisées et le code source sur GitHub.
+              {t.projects.introNote}
             </p>
           </div>
 
@@ -41,7 +54,7 @@ export const ProjectsIntro: React.FC = () => {
                 6
               </span>
               <span className="text-[10px] sm:text-xs font-mono text-navy-muted block mt-0.5">
-                Projets réalisés
+                {t.projects.introStatProjects}
               </span>
             </div>
 
@@ -50,16 +63,16 @@ export const ProjectsIntro: React.FC = () => {
                 4
               </span>
               <span className="text-[10px] sm:text-xs font-mono text-navy-muted block mt-0.5">
-                Apps mobiles Flutter
+                {t.projects.introStatMobile}
               </span>
             </div>
 
             <div className="p-3 sm:p-4 rounded-xl bg-navy-card/60 border border-white/10 text-center">
               <span className="font-serif font-bold text-sm sm:text-base text-navy-text block truncate">
-                Web & Mobile
+                {t.projects.introStatSpecValue}
               </span>
               <span className="text-[10px] sm:text-xs font-mono text-navy-muted block mt-0.5">
-                Spécialisation
+                {t.projects.introStatSpec}
               </span>
             </div>
           </div>
@@ -73,7 +86,7 @@ export const ProjectsIntro: React.FC = () => {
               <div className="relative rounded-t-[110px] rounded-b-[28px] overflow-hidden flex items-end justify-center">
                 <img
                   src={getAssetUrl('assets/avatar.jpg')}
-                  alt="Avatar 3D d'Ikram Raboudi"
+                  alt={t.projects.avatarAlt}
                   width={1536}
                   height={2744}
                   loading="lazy"
@@ -95,30 +108,30 @@ export const ProjectsIntro: React.FC = () => {
             {/* Carte Flottante 1 : Klitchi / 3 apps Flutter (en haut à gauche, au-dessus de la tête) */}
             <div className="absolute -top-3 -left-2 sm:-left-5 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
-                Klitchi
+                {t.projects.floatingKlitchi}
               </span>
               <span className="text-[10px] font-mono text-denim-600 dark:text-denim-300">
-                3 apps Flutter
+                {t.projects.floatingKlitchiSub}
               </span>
             </div>
 
             {/* Carte Flottante 2 : API Go + PostgreSQL / Temps réel WebSockets (abaissée en bas à droite, niveau épaule/torse, dégageant entièrement le visage et les lunettes) */}
             <div className="absolute bottom-2 -right-2 sm:-right-5 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-delayed">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
-                API Go + PostgreSQL
+                {t.projects.floatingGo}
               </span>
               <span className="text-[10px] font-mono text-denim-600 dark:text-denim-300">
-                Temps réel WebSockets
+                {t.projects.floatingGoSub}
               </span>
             </div>
 
             {/* Carte Flottante 3 : 6 projets / Web · Mobile · Desktop (tout en bas à gauche) */}
             <div className="absolute -bottom-3 -left-1 sm:-left-3 z-20 flex flex-col px-3.5 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-slow">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
-                6 projets
+                {t.projects.floatingProjects}
               </span>
               <span className="text-[10px] font-mono text-denim-600 dark:text-denim-300">
-                Web · Mobile · Desktop
+                {t.projects.floatingProjectsSub}
               </span>
             </div>
           </div>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { ArrowUp, Github, Linkedin, Eye, Heart } from 'lucide-react';
 import { profile } from '../../data/profile';
-import { getAssetUrl } from '../../utils/paths';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 export const Footer: React.FC = () => {
+  const { lang, t, getCvUrl } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -25,49 +27,51 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-sm text-navy-muted max-w-md leading-relaxed">
-              {profile.tagline}
+              {profile.tagline[lang]}
             </p>
             {/* Rappel du badge de disponibilité PFE */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium bg-navy-card text-navy-text border border-white/15 w-fit">
               <span className="w-2 h-2 rounded-full bg-sage-badge animate-pulse" />
-              <span>{profile.availability.status} · {profile.availability.period}</span>
+              <span>
+                {profile.availability.status[lang]} · {profile.availability.period[lang]}
+              </span>
             </div>
           </div>
 
           {/* Navigation rapide */}
           <div>
             <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-navy-text mb-4">
-              Navigation
+              {t.footer.navTitle}
             </h4>
             <ul className="space-y-2.5 text-sm text-navy-muted">
               <li>
                 <a href="#accueil" className="hover:text-navy-text transition-colors">
-                  Accueil
+                  {t.nav.links.accueil}
                 </a>
               </li>
               <li>
                 <a href="#a-propos" className="hover:text-navy-text transition-colors">
-                  À propos
+                  {t.nav.links.aPropos}
                 </a>
               </li>
               <li>
                 <a href="#competences" className="hover:text-navy-text transition-colors">
-                  Compétences
+                  {t.nav.links.competences}
                 </a>
               </li>
               <li>
                 <a href="#projets" className="hover:text-navy-text transition-colors">
-                  Projets
+                  {t.nav.links.projets}
                 </a>
               </li>
               <li>
                 <a href="#parcours" className="hover:text-navy-text transition-colors">
-                  Parcours & Expérience
+                  {t.nav.links.parcours}
                 </a>
               </li>
               <li>
                 <a href="#contact" className="hover:text-navy-text transition-colors">
-                  Contact
+                  {t.nav.links.contact}
                 </a>
               </li>
             </ul>
@@ -76,14 +80,14 @@ export const Footer: React.FC = () => {
           {/* Réseaux & CV */}
           <div>
             <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-navy-text mb-4">
-              Connexion
+              {t.footer.connectTitle}
             </h4>
             <div className="flex items-center gap-3 mb-4">
               <a
                 href={profile.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Profil GitHub d'Ikram Raboudi"
+                aria-label={t.hero.githubAria}
                 className="p-2.5 rounded-xl border border-white/10 bg-navy-card text-navy-muted hover:text-navy-accent hover:border-white/25 hover:scale-105 transition-all shadow-sm"
               >
                 <Github className="w-5 h-5" />
@@ -92,21 +96,21 @@ export const Footer: React.FC = () => {
                 href={profile.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Profil LinkedIn d'Ikram Raboudi"
+                aria-label={t.hero.linkedinAria}
                 className="p-2.5 rounded-xl border border-white/10 bg-navy-card text-navy-muted hover:text-navy-accent hover:border-white/25 hover:scale-105 transition-all shadow-sm"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
             <a
-              href={getAssetUrl(profile.cvPath)}
+              href={getCvUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs text-navy-primary hover:text-navy-accent hover:underline font-mono"
-              title="Consulter mon CV (PDF)"
+              title={`${t.footer.viewCv} (PDF)`}
             >
               <Eye className="w-3.5 h-3.5" />
-              <span>Consulter mon CV</span>
+              <span>{t.footer.viewCv}</span>
             </a>
           </div>
         </div>
@@ -114,7 +118,7 @@ export const Footer: React.FC = () => {
         {/* Ligne inférieure & Copyright */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-navy-muted">
           <p className="flex items-center gap-1.5">
-            <span>© 2026 Ikram Raboudi · Conçu avec passion & soin</span>
+            <span>{t.footer.copyright}</span>
             <Heart className="w-3.5 h-3.5 text-navy-accent fill-navy-accent" />
           </p>
 
@@ -123,7 +127,7 @@ export const Footer: React.FC = () => {
             onClick={scrollToTop}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/15 bg-navy-card hover:bg-navy text-navy-text transition-colors font-medium"
           >
-            <span>Retour en haut</span>
+            <span>{t.footer.backToTop}</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>

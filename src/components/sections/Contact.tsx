@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle2, AlertCircle, Loader2, Copy, Check, Eye } from 'lucide-react';
 import { profile } from '../../data/profile';
-import { getAssetUrl } from '../../utils/paths';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { SectionHeading } from '../common/SectionHeading';
 
 interface FormData {
@@ -13,13 +13,23 @@ interface FormData {
 }
 
 export const Contact: React.FC = () => {
+  const { lang, t, getCvUrl } = useLanguage();
+
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    subject: 'Proposition de stage PFE',
+    subject: t.contact.subjectOptions.pfe,
     message: '',
     honeypot: '',
   });
+
+  // Mettre à jour le sujet par défaut si l'utilisateur change de langue
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      subject: t.contact.subjectOptions.pfe,
+    }));
+  }, [lang, t.contact.subjectOptions.pfe]);
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -38,19 +48,19 @@ export const Contact: React.FC = () => {
     const newErrors: Partial<Record<keyof FormData, string>> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Veuillez renseigner votre nom.';
+      newErrors.name = t.contact.valName;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Veuillez renseigner votre adresse email.';
+      newErrors.email = t.contact.valEmail;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Veuillez saisir une adresse email valide.';
+      newErrors.email = t.contact.valEmailValid;
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Veuillez écrire un message.';
+      newErrors.message = t.contact.valMessage;
     } else if (formData.message.trim().length < 20) {
-      newErrors.message = 'Votre message doit contenir au moins 20 caractères.';
+      newErrors.message = t.contact.valMessageLength;
     }
 
     setErrors(newErrors);
@@ -78,9 +88,7 @@ export const Contact: React.FC = () => {
     // Si pas de Formspree ID configuré, ne PAS ouvrir Outlook
     if (!formspreeId || formspreeId === 'undefined' || formspreeId.trim() === '') {
       setStatus('error');
-      setToastMessage(
-        "Pour envoyer l'email directement sans ouvrir Outlook, renseignez votre identifiant Formspree dans le fichier .env (VITE_FORMSPREE_ID=votre_id)."
-      );
+      setToastMessage(t.contact.directEmailNotice);
       setTimeout(() => setStatus('idle'), 8000);
       return;
     }
@@ -98,16 +106,17 @@ export const Contact: React.FC = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
+          'Langue du visiteur': lang === 'en' ? 'English (EN)' : 'Français (FR)',
         }),
       });
 
       if (response.ok) {
         setStatus('success');
-        setToastMessage('Merci pour votre message ! Je vous répondrai dans les plus brefs délais (sous 24 h).');
+        setToastMessage(t.contact.successToast);
         setFormData({
           name: '',
           email: '',
-          subject: 'Proposition de stage PFE',
+          subject: t.contact.subjectOptions.pfe,
           message: '',
           honeypot: '',
         });
@@ -117,7 +126,7 @@ export const Contact: React.FC = () => {
       }
     } catch {
       setStatus('error');
-      setToastMessage('Une erreur est survenue. Vous pouvez me contacter directement à ' + profile.email);
+      setToastMessage(t.contact.errorToast + profile.email);
       setTimeout(() => setStatus('idle'), 6000);
     }
   };
@@ -126,8 +135,8 @@ export const Contact: React.FC = () => {
     <section id="contact" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         emoji="💌"
-        title="Contact"
-        subtitle="Une question, une opportunité de stage PFE ou un projet ? Échangeons ensemble."
+        title={t.contact.sectionTitle}
+        subtitle={t.contact.sectionSubtitle}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -135,7 +144,7 @@ export const Contact: React.FC = () => {
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="p-6 sm:p-8 rounded-3xl bg-surface-light dark:bg-surface-dark border border-line-light dark:border-line-dark shadow-soft">
             <h3 className="font-serif text-xl sm:text-2xl font-semibold text-content-mainLight dark:text-content-mainDark mb-6">
-              Mes coordonnées
+              {t.contact.coordsTitle}
             </h3>
 
             <div className="space-y-4">
@@ -145,7 +154,7 @@ export const Contact: React.FC = () => {
                   href={`https://mail.google.com/mail/?view=cm&fs=1&to=${profile.email}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  title="Envoyer un email via Gmail (navigateur)"
+                  title="Gmail Web"
                   className="flex items-center gap-4 min-w-0 flex-1"
                 >
                   <div className="p-2.5 rounded-xl bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 group-hover:scale-110 transition-transform shrink-0">
@@ -153,7 +162,7 @@ export const Contact: React.FC = () => {
                   </div>
                   <div className="flex flex-col min-w-0">
                     <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                      Email direct (Gmail Web)
+                      {t.contact.emailLabel}
                     </span>
                     <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark truncate group-hover:text-denim-600 dark:group-hover:text-denim-400">
                       {profile.email}
@@ -163,19 +172,19 @@ export const Contact: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  title="Copier l'adresse email"
-                  aria-label="Copier l'adresse email"
+                  title={t.contact.copyEmailTitle}
+                  aria-label={t.contact.copyEmailTitle}
                   className="p-2 rounded-xl border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark hover:text-denim-600 dark:hover:text-denim-300 transition-all shrink-0 flex items-center gap-1.5 text-xs font-mono"
                 >
                   {copied ? (
                     <>
                       <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-[11px] text-emerald-600 dark:text-emerald-400">Copié</span>
+                      <span className="text-[11px] text-emerald-600 dark:text-emerald-400">✓</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4" />
-                      <span className="hidden sm:inline text-[11px]">Copier</span>
+                      <span className="hidden sm:inline text-[11px]">Copy</span>
                     </>
                   )}
                 </button>
@@ -191,7 +200,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div className="flex flex-col min-w-0">
                   <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                    Téléphone / WhatsApp
+                    {t.contact.phoneLabel}
                   </span>
                   <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark group-hover:text-denim-600 dark:group-hover:text-denim-400">
                     {profile.displayPhone}
@@ -206,19 +215,19 @@ export const Contact: React.FC = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                    Résidence
+                    {t.contact.locationLabel}
                   </span>
                   <span className="text-sm font-semibold text-content-mainLight dark:text-content-mainDark">
-                    {profile.location}
+                    {profile.location[lang]}
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Réseaux sociaux */}
+            {/* Réseaux sociaux & CV */}
             <div className="mt-8 pt-6 border-t border-line-light/80 dark:border-line-dark/80">
               <span className="text-xs font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark block mb-3">
-                Profils professionnels :
+                {t.contact.socialTitle} :
               </span>
               <div className="flex items-center gap-3">
                 <a
@@ -242,14 +251,14 @@ export const Contact: React.FC = () => {
               </div>
               <div className="mt-3">
                 <a
-                  href={getAssetUrl(profile.cvPath)}
+                  href={getCvUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-line-light dark:border-line-dark bg-surface-softLight/40 dark:bg-surface-softDark/40 text-xs font-semibold text-content-mainLight dark:text-content-mainDark hover:bg-denim-50 dark:hover:bg-denim-900/30 hover:text-denim-600 transition-colors"
-                  title="Consulter mon CV (PDF)"
+                  title={`${t.nav.viewCv} (PDF)`}
                 >
                   <Eye className="w-4 h-4 text-denim-600 dark:text-denim-400" />
-                  <span>Consulter mon CV</span>
+                  <span>{t.nav.viewCv}</span>
                 </a>
               </div>
             </div>
@@ -260,10 +269,10 @@ export const Contact: React.FC = () => {
         <div className="lg:col-span-7">
           <div className="p-6 sm:p-8 rounded-3xl bg-surface-light dark:bg-surface-dark border border-line-light dark:border-line-dark shadow-soft">
             <h3 className="font-serif text-xl sm:text-2xl font-semibold text-content-mainLight dark:text-content-mainDark mb-2">
-              Envoyez-moi un message
+              {t.contact.formTitle}
             </h3>
             <p className="text-xs sm:text-sm text-content-secLight dark:text-content-secDark mb-6">
-              Remplissez le formulaire ci-dessous ou contactez-moi directement par mail.
+              {t.contact.formSubtitle}
             </p>
 
             <form onSubmit={handleSubmit} noValidate className="space-y-4">
@@ -285,13 +294,13 @@ export const Contact: React.FC = () => {
                     htmlFor="contact-name"
                     className="block text-xs font-semibold text-content-mainLight dark:text-content-mainDark mb-1.5"
                   >
-                    Nom complet <span className="text-rose-powder">*</span>
+                    {t.contact.nameLabel} <span className="text-rose-powder">*</span>
                   </label>
                   <input
                     id="contact-name"
                     type="text"
                     required
-                    placeholder="Ex. Sarah Ben Salem"
+                    placeholder={t.contact.namePlaceholder}
                     value={formData.name}
                     onChange={e => {
                       setFormData({ ...formData, name: e.target.value });
@@ -314,13 +323,13 @@ export const Contact: React.FC = () => {
                     htmlFor="contact-email"
                     className="block text-xs font-semibold text-content-mainLight dark:text-content-mainDark mb-1.5"
                   >
-                    Adresse email <span className="text-rose-powder">*</span>
+                    {t.contact.emailInputLabel} <span className="text-rose-powder">*</span>
                   </label>
                   <input
                     id="contact-email"
                     type="email"
                     required
-                    placeholder="nom@entreprise.com"
+                    placeholder={t.contact.emailPlaceholder}
                     value={formData.email}
                     onChange={e => {
                       setFormData({ ...formData, email: e.target.value });
@@ -345,7 +354,7 @@ export const Contact: React.FC = () => {
                   htmlFor="contact-subject"
                   className="block text-xs font-semibold text-content-mainLight dark:text-content-mainDark mb-1.5"
                 >
-                  Sujet de votre message
+                  {t.contact.subjectLabel}
                 </label>
                 <select
                   id="contact-subject"
@@ -353,10 +362,18 @@ export const Contact: React.FC = () => {
                   onChange={e => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl text-sm bg-surface-softLight/50 dark:bg-surface-softDark/50 border border-line-light dark:border-line-dark text-content-mainLight dark:text-content-mainDark focus:bg-surface-light dark:focus:bg-surface-dark transition-colors"
                 >
-                  <option value="Proposition de stage PFE">Proposition de stage PFE (février - mai 2027)</option>
-                  <option value="Collaboration">Opportunité de collaboration professionnelle</option>
-                  <option value="Question">Question sur un projet / une technologie</option>
-                  <option value="Autre">Autre échange</option>
+                  <option value={t.contact.subjectOptions.pfe}>
+                    {t.contact.subjectOptions.pfeDisplay}
+                  </option>
+                  <option value={t.contact.subjectOptions.collaboration}>
+                    {t.contact.subjectOptions.collaborationDisplay}
+                  </option>
+                  <option value={t.contact.subjectOptions.question}>
+                    {t.contact.subjectOptions.questionDisplay}
+                  </option>
+                  <option value={t.contact.subjectOptions.other}>
+                    {t.contact.subjectOptions.otherDisplay}
+                  </option>
                 </select>
               </div>
 
@@ -367,17 +384,17 @@ export const Contact: React.FC = () => {
                     htmlFor="contact-message"
                     className="block text-xs font-semibold text-content-mainLight dark:text-content-mainDark"
                   >
-                    Votre message <span className="text-rose-powder">*</span>
+                    {t.contact.messageLabel} <span className="text-rose-powder">*</span>
                   </label>
                   <span className="text-[11px] font-mono text-content-secLight dark:text-content-secDark">
-                    Min. 20 caractères ({formData.message.trim().length}/20)
+                    {t.contact.messageMinChars} ({formData.message.trim().length}/20)
                   </span>
                 </div>
                 <textarea
                   id="contact-message"
                   required
                   rows={4}
-                  placeholder="Décrivez votre projet, vos besoins ou les détails du stage proposé..."
+                  placeholder={t.contact.messagePlaceholder}
                   value={formData.message}
                   onChange={e => {
                     setFormData({ ...formData, message: e.target.value });
@@ -404,11 +421,11 @@ export const Contact: React.FC = () => {
                 {status === 'submitting' ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Envoi en cours...</span>
+                    <span>{t.contact.submittingBtn}</span>
                   </>
                 ) : (
                   <>
-                    <span>Envoyer le message</span>
+                    <span>{t.contact.submitBtn}</span>
                     <Send className="w-4 h-4" />
                   </>
                 )}

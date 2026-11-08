@@ -4,24 +4,33 @@ import { projects } from '../../data/projects';
 import { profile } from '../../data/profile';
 import { Project } from '../../types';
 import { getAssetUrl } from '../../utils/paths';
+import { useLanguage } from '../../i18n/LanguageContext';
 import { SectionHeading } from '../common/SectionHeading';
 import { ProjectsIntro } from './ProjectsIntro';
 import { ProjectCard } from './ProjectCard';
 import { Lightbox } from '../common/Lightbox';
 
 export const Projects: React.FC = () => {
+  const { t } = useLanguage();
   const [selectedProjectForLightbox, setSelectedProjectForLightbox] = useState<Project | null>(null);
   const [filter, setFilter] = useState<string>('all');
 
   const filteredProjects =
-    filter === 'all' ? projects : projects.filter(p => p.category.includes(filter));
+    filter === 'all' ? projects : projects.filter(p => p.category.includes(filter as any));
+
+  const filterOptions = [
+    { id: 'all', label: t.projects.filterAll },
+    { id: 'Mobile', label: t.projects.filterMobile },
+    { id: 'Web', label: t.projects.filterWeb },
+    { id: 'Desktop', label: t.projects.filterDesktop },
+  ];
 
   return (
     <section id="projets" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         emoji="🚀"
-        title="Projets"
-        subtitle="Sélection de 6 réalisations concrètes démontrant mon savoir-faire mobile, web et desktop."
+        title={t.projects.sectionTitle}
+        subtitle={t.projects.sectionSubtitle}
       />
 
       {/* Bandeau d'introduction de la section Projets avec Avatar 3D */}
@@ -29,12 +38,7 @@ export const Projects: React.FC = () => {
 
       {/* Filtres de catégorie */}
       <div className="flex flex-wrap items-center gap-2 mb-10 pb-1">
-        {[
-          { id: 'all', label: 'Tous les projets (6)' },
-          { id: 'Mobile', label: 'Mobile (Flutter)' },
-          { id: 'Web', label: 'Web (Symfony, Django REST, PHP)' },
-          { id: 'Desktop', label: 'Desktop (JavaFX)' },
-        ].map(item => (
+        {filterOptions.map(item => (
           <button
             key={item.id}
             type="button"
@@ -70,7 +74,7 @@ export const Projects: React.FC = () => {
           className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-line-light dark:border-line-dark bg-surface-light dark:bg-surface-dark text-content-mainLight dark:text-content-mainDark hover:bg-surface-softLight dark:hover:bg-surface-softDark hover:border-denim-400 font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-soft"
         >
           <Github className="w-5 h-5 text-denim-600 dark:text-denim-400" />
-          <span>Voir tous mes dépôts sur GitHub</span>
+          <span>{t.projects.viewAllGithub}</span>
           <ExternalLink className="w-4 h-4 text-content-secLight dark:text-content-secDark" />
         </a>
       </div>
@@ -81,7 +85,7 @@ export const Projects: React.FC = () => {
           isOpen={true}
           onClose={() => setSelectedProjectForLightbox(null)}
           imageSrc={getAssetUrl(selectedProjectForLightbox.image)}
-          imageAlt={`Capture d'écran du projet ${selectedProjectForLightbox.title}`}
+          imageAlt={t.projects.zoomAria.replace('{title}', selectedProjectForLightbox.title)}
           title={selectedProjectForLightbox.title}
           githubUrl={selectedProjectForLightbox.githubUrl}
         />

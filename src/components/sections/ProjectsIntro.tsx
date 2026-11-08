@@ -92,8 +92,8 @@ export const ProjectsIntro: React.FC = () => {
               </div>
             </div>
 
-            {/* Carte Flottante 1 : Klitchi / 3 apps Flutter */}
-            <div className="absolute -top-3 left-0 sm:-left-4 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float">
+            {/* Carte Flottante 1 : Klitchi / 3 apps Flutter (en haut à gauche, totalement au-dessus du visage) */}
+            <div className="absolute -top-3 -left-2 sm:-left-6 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
                 Klitchi
               </span>
@@ -102,8 +102,8 @@ export const ProjectsIntro: React.FC = () => {
               </span>
             </div>
 
-            {/* Carte Flottante 2 : API Go + PostgreSQL / Temps réel WebSockets */}
-            <div className="absolute top-1/2 -right-2 sm:-right-5 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-delayed">
+            {/* Carte Flottante 2 : API Go + PostgreSQL / Temps réel WebSockets (abaissée au niveau de l'épaule droite pour dégager entièrement le visage et les lunettes) */}
+            <div className="absolute bottom-12 -right-2 sm:-right-6 z-20 flex flex-col px-3 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-delayed">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
                 API Go + PostgreSQL
               </span>
@@ -112,8 +112,8 @@ export const ProjectsIntro: React.FC = () => {
               </span>
             </div>
 
-            {/* Carte Flottante 3 : 6 projets / Web · Mobile · Desktop */}
-            <div className="absolute -bottom-3 left-2 sm:left-4 z-20 flex flex-col px-3.5 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-slow">
+            {/* Carte Flottante 3 : 6 projets / Web · Mobile · Desktop (en bas à gauche) */}
+            <div className="absolute -bottom-3 -left-1 sm:-left-3 z-20 flex flex-col px-3.5 py-1.5 rounded-2xl bg-surface-light/95 dark:bg-surface-dark/95 border border-line-light dark:border-line-dark backdrop-blur-md shadow-soft animate-soft-float-slow">
               <span className="text-xs font-bold text-content-mainLight dark:text-content-mainDark">
                 6 projets
               </span>

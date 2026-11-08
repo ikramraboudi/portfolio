@@ -58,7 +58,7 @@ export const profile: ProfileData = {
     fr: 'assets/docs/CV_Ikram_Raboudi_PFE.pdf',
     en: 'assets/docs/CV_Ikram_Raboudi_PFE_EN.pdf',
   },
-  hasEnglishCV: false,
+  hasEnglishCV: true,
   photoPath: 'assets/ikram.png',
   avatarPath: 'assets/avatar.jpg',
   quickFacts: {

@@ -15,6 +15,15 @@
     --accent-soft: #F6E3E0;
     --badge-success: #8FB79B;
     --border-color: #E7E0D6;
+
+    /* Nouveaux tokens Bleu Marine (mode clair) */
+    --navy: #1F2D4D;
+    --navy-deep: #16213B;
+    --navy-card: #2A3B63;
+    --on-navy: #F3EEE7;
+    --on-navy-muted: #B9C4D8;
+    --on-navy-accent: #E8B9B3;
+    --on-navy-primary: #8FB0D6;
   }
 
   .dark {
@@ -29,6 +38,15 @@
     --accent-soft: #3A2A2E;
     --badge-success: #8FB79B;
     --border-color: #2F3947;
+
+    /* Nouveaux tokens Bleu Marine (mode sombre distinct du fond sombre #141A23) */
+    --navy: #22335A;
+    --navy-deep: #1A2848;
+    --navy-card: #2E406C;
+    --on-navy: #F3EEE7;
+    --on-navy-muted: #B9C4D8;
+    --on-navy-accent: #E8B9B3;
+    --on-navy-primary: #8FB0D6;
   }
 
   html {
@@ -49,6 +67,14 @@
     box-shadow: none !important;
   }
 
+  /* Sous-titres uniformes sur fond marine : couleur --on-navy-primary pure, sans dégradé ni ligne */
+  .section-subtitle-navy {
+    color: var(--on-navy-primary);
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
   /* Focus visible accessible AA */
   a:focus-visible,
   button:focus-visible,
@@ -56,6 +82,17 @@
   textarea:focus-visible,
   select:focus-visible {
     outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  /* Focus visible sur fond marine (contour rose poudré) */
+  .bg-navy a:focus-visible,
+  .bg-navy button:focus-visible,
+  .bg-navy-deep a:focus-visible,
+  .bg-navy-deep button:focus-visible,
+  [data-theme-bg="navy"] a:focus-visible,
+  [data-theme-bg="navy"] button:focus-visible {
+    outline: 2px solid var(--on-navy-accent);
     outline-offset: 3px;
   }
 }

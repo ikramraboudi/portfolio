@@ -12,7 +12,7 @@ export const Skills: React.FC = () => {
       : skillCategories.filter(cat => cat.title === selectedCategory);
 
   return (
-    <section id="competences" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="competences" className="my-8 py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 rounded-[2.5rem] bg-surface-softLight/60 dark:bg-surface-softDark/50 border border-line-light/60 dark:border-line-dark/60 transition-colors">
       <SectionHeading
         emoji="🛠️"
         title="Compétences"
@@ -26,7 +26,7 @@ export const Skills: React.FC = () => {
           onClick={() => setSelectedCategory('all')}
           className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
             selectedCategory === 'all'
-              ? 'bg-denim-500 text-white shadow-sm'
+              ? 'bg-navy text-navy-text shadow-sm'
               : 'bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark border border-line-light dark:border-line-dark hover:bg-surface-softLight dark:hover:bg-surface-softDark'
           }`}
         >
@@ -39,7 +39,7 @@ export const Skills: React.FC = () => {
             onClick={() => setSelectedCategory(cat.title)}
             className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${
               selectedCategory === cat.title
-                ? 'bg-denim-500 text-white shadow-sm'
+                ? 'bg-navy text-navy-text shadow-sm'
                 : 'bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark border border-line-light dark:border-line-dark hover:bg-surface-softLight dark:hover:bg-surface-softDark'
             }`}
           >
@@ -57,7 +57,7 @@ export const Skills: React.FC = () => {
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h3 className="font-serif text-lg font-semibold text-content-mainLight dark:text-content-mainDark">
+                <h3 className="font-serif text-lg font-semibold text-navy dark:text-navy-primary">
                   {cat.title}
                 </h3>
                 <span className="text-xs font-mono px-2 py-0.5 rounded-md bg-denim-50 dark:bg-denim-900/40 text-denim-600 dark:text-denim-300 font-semibold">

@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           {/* Bouton Me Contacter */}
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full bg-denim-500 hover:bg-denim-600 text-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full bg-navy hover:bg-navy-card text-navy-text transition-all duration-200 hover:scale-105 active:scale-95 shadow-sm"
           >
             <span>Me contacter</span>
             <Send className="w-3.5 h-3.5" />
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold bg-denim-500 hover:bg-denim-600 text-white"
+              className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold bg-navy hover:bg-navy-card text-navy-text"
             >
               <span>Me contacter</span>
               <Send className="w-4 h-4" />

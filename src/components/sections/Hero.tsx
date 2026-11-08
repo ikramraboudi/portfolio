@@ -53,7 +53,7 @@ export const Hero: React.FC = () => {
             <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
               <a
                 href="#projets"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-denim-500 hover:bg-denim-600 text-white font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 active:scale-95 shadow-soft hover:shadow-soft-lg"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-navy hover:bg-navy-card text-navy-text font-medium text-sm sm:text-base transition-all duration-200 hover:scale-105 active:scale-95 shadow-soft hover:shadow-soft-lg"
               >
                 <span>Voir mes projets</span>
                 <ArrowRight className="w-4 h-4" />
@@ -75,7 +75,7 @@ export const Hero: React.FC = () => {
                 title="Consulter le CV au format PDF"
               >
                 <Eye className="w-4 h-4 text-denim-500" />
-                <span className="underline underline-offset-4">Consulter mon CV</span>
+                <span className="hover:underline">CV</span>
               </a>
             </div>
 
@@ -107,6 +107,16 @@ export const Hero: React.FC = () => {
 
           {/* Colonne Droite : Photo réelle détourée d'Ikram & Pastilles flottantes */}
           <div className="lg:col-span-5 flex justify-center lg:justify-end relative">
+            {/* Halo décoratif marine en arrière-plan pour donner de la profondeur */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[420px] h-[340px] sm:h-[420px] rounded-full bg-navy/10 dark:bg-navy/25 blur-3xl pointer-events-none -z-10"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute -top-4 -right-4 w-48 h-48 rounded-full bg-navy/5 dark:bg-navy/15 blur-2xl pointer-events-none -z-10"
+              aria-hidden="true"
+            />
+
             <div className="relative w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[400px]">
               {/* Forme en arche douce : fond rose poudré/denim clair, mix-blend-multiply en mode clair, carte ivoire arrondie en mode sombre */}
               <div className="relative rounded-t-[120px] rounded-b-[36px] overflow-hidden border-2 border-line-light dark:border-line-dark shadow-soft-lg bg-gradient-to-b from-rose-soft/80 via-denim-50 to-surface-softLight dark:from-[#FAF7F2] dark:via-[#F3EEE7] dark:to-[#EAE3D9] p-3 pt-6 transition-all">

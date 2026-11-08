@@ -81,12 +81,12 @@ export const AskIkram: React.FC = () => {
 
   return (
     <div className="w-full max-w-[420px] mx-auto">
-      {/* Cadre smartphone élégant */}
-      <div className="relative rounded-[2.5rem] p-3 sm:p-3.5 bg-gradient-to-b from-surface-light via-surface-softLight to-surface-light dark:from-surface-dark dark:via-surface-softDark dark:to-surface-dark border-4 border-line-light/90 dark:border-line-dark shadow-soft-lg">
+      {/* Cadre smartphone élégant marine profond */}
+      <div className="relative rounded-[2.5rem] p-3 sm:p-3.5 bg-gradient-to-b from-navy-deep via-navy to-navy-deep border-4 border-navy-deep shadow-soft-lg">
         {/* Encoche haut-parleur / caméra */}
-        <div className="w-24 h-4 bg-line-light/80 dark:bg-line-dark/90 rounded-full mx-auto mb-3 flex items-center justify-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-content-secLight/40 dark:bg-content-secDark/40" />
-          <span className="w-3.5 h-1 rounded-full bg-content-secLight/30 dark:bg-content-secDark/30" />
+        <div className="w-24 h-4 bg-navy-card/90 rounded-full mx-auto mb-3 flex items-center justify-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-navy-muted/40" />
+          <span className="w-3.5 h-1 rounded-full bg-navy-muted/30" />
         </div>
 
         {/* Écran intérieur */}

@@ -399,7 +399,7 @@ export const Contact: React.FC = () => {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-denim-500 hover:bg-denim-600 disabled:opacity-60 text-white font-semibold text-sm transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] shadow-soft"
+                className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-navy hover:bg-navy-card disabled:opacity-60 text-navy-text font-semibold text-sm transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] shadow-soft"
               >
                 {status === 'submitting' ? (
                   <>

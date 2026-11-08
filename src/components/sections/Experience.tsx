@@ -52,7 +52,7 @@ export const Experience: React.FC = () => {
             onClick={() => setActiveTab(tab.id as typeof activeTab)}
             className={`px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 ${
               activeTab === tab.id
-                ? 'bg-denim-500 text-white shadow-sm'
+                ? 'bg-navy text-navy-text shadow-sm'
                 : 'bg-surface-light dark:bg-surface-dark text-content-secLight dark:text-content-secDark border border-line-light dark:border-line-dark hover:bg-surface-softLight dark:hover:bg-surface-softDark'
             }`}
           >

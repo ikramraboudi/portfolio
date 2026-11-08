@@ -23,6 +23,15 @@ export default {
           powder: '#E8B9B3',
           dark: '#D9A7A1',
         },
+        navy: {
+          DEFAULT: 'var(--navy)',
+          deep: 'var(--navy-deep)',
+          card: 'var(--navy-card)',
+          text: 'var(--on-navy)',
+          muted: 'var(--on-navy-muted)',
+          accent: 'var(--on-navy-accent)',
+          primary: 'var(--on-navy-primary)',
+        },
         sage: {
           soft: '#EAF3EC',
           badge: '#8FB79B',

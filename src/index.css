@@ -53,6 +53,10 @@
     scroll-behavior: smooth;
   }
 
+  #a-propos {
+    overflow-anchor: none;
+  }
+
   body {
     background-color: var(--bg-main);
     color: var(--text-main);

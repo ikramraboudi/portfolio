@@ -16,7 +16,7 @@ export const About: React.FC = () => {
   const { lang, t } = useLanguage();
 
   return (
-    <section id="a-propos" className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="a-propos" style={{ overflowAnchor: 'none' }} className="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <SectionHeading
         emoji="👋"
         title={t.about.sectionTitle}
@@ -142,7 +142,7 @@ export const About: React.FC = () => {
         </div>
 
         {/* Colonne droite (5 cols) : Mini smartphone AskIkram */}
-        <div className="lg:col-span-5 flex flex-col items-center">
+        <div className="lg:col-span-5 flex flex-col items-center" style={{ overflowAnchor: 'none' }}>
           <div className="mb-3 text-center">
             <span className="text-xs font-mono uppercase tracking-wider text-denim-600 dark:text-denim-400 font-semibold">
               {t.about.simulationBadge}

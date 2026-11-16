@@ -16,6 +16,22 @@ import { Contact } from './components/sections/Contact';
 const PortfolioContent: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
 
+  // Gestion du scroll au premier chargement : haut de page si aucun hash, respect du hash sinon
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    } else {
+      const targetId = window.location.hash.slice(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView();
+      }
+    }
+  }, []);
+
   // Mise à jour des balises Open Graph et canonical selon VITE_SITE_URL (sans faux domaine)
   useEffect(() => {
     const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '');

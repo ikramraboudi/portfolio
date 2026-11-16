@@ -19,7 +19,7 @@ export const AskIkram: React.FC = () => {
   const [typedWelcome, setTypedWelcome] = useState('');
   const [usedOptionIds, setUsedOptionIds] = useState<Set<string>>(new Set());
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const initialMsg = t.askIkram.initialMessage;
 
@@ -42,21 +42,50 @@ export const AskIkram: React.FC = () => {
     setMessages([]);
     setUsedOptionIds(new Set());
     setIsTyping(false);
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = 0;
+    }
   }, [lang]);
 
-  // Défilement automatique vers le bas à chaque nouveau message
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  // Défilement automatique INTERNE au conteneur des messages uniquement
+  const scrollToBottom = (behavior?: ScrollBehavior) => {
+    if (messagesContainerRef.current) {
+      const prefersReducedMotion =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const scrollBehavior: ScrollBehavior =
+        behavior || (prefersReducedMotion ? 'auto' : 'smooth');
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: scrollBehavior,
+      });
     }
   };
 
+  // Ne faire défiler le conteneur interne QUE si de nouveaux messages sont ajoutés ou pendant la frappe
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping, typedWelcome]);
+    if (messages.length > 0 || isTyping) {
+      scrollToBottom();
+      const raf = requestAnimationFrame(() => {
+        scrollToBottom();
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+  }, [messages, isTyping]);
 
-  const handleSelectOption = (option: AskOption) => {
+  const handleSelectOption = (
+    option: AskOption,
+    e?: React.MouseEvent<HTMLButtonElement>
+  ) => {
     if (usedOptionIds.has(option.id) || isTyping) return;
+
+    // Retirer immédiatement le focus pour empêcher le navigateur de déplacer le scroll de la page
+    if (e?.currentTarget) {
+      e.currentTarget.blur();
+    }
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
 
     setUsedOptionIds(prev => new Set(prev).add(option.id));
 
@@ -88,26 +117,38 @@ export const AskIkram: React.FC = () => {
     }, 600);
   };
 
-  const handleReset = () => {
+  const handleReset = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    if (e?.currentTarget) {
+      e.currentTarget.blur();
+    }
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     setMessages([]);
     setUsedOptionIds(new Set());
     setIsTyping(false);
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = 0;
+    }
   };
 
   return (
-    <div className="w-full max-w-[420px] mx-auto">
-      {/* Cadre smartphone élégant marine profond */}
-      <div className="relative rounded-[2.5rem] p-3 sm:p-3.5 bg-gradient-to-b from-navy-deep via-navy to-navy-deep border-4 border-navy-deep shadow-soft-lg">
+    <div className="w-full max-w-[420px] mx-auto" style={{ overflowAnchor: 'none' }}>
+      {/* Cadre smartphone élégant marine profond à hauteur fixe */}
+      <div
+        className="relative rounded-[2.5rem] p-3 sm:p-3.5 bg-gradient-to-b from-navy-deep via-navy to-navy-deep border-4 border-navy-deep shadow-soft-lg flex flex-col h-[520px] sm:h-[560px] max-h-[85vh]"
+        style={{ overflowAnchor: 'none' }}
+      >
         {/* Encoche haut-parleur / caméra */}
-        <div className="w-24 h-4 bg-navy-card/90 rounded-full mx-auto mb-3 flex items-center justify-center gap-2">
+        <div className="w-24 h-4 bg-navy-card/90 rounded-full mx-auto mb-2.5 sm:mb-3 flex items-center justify-center gap-2 shrink-0">
           <span className="w-2 h-2 rounded-full bg-navy-muted/40" />
           <span className="w-3.5 h-1 rounded-full bg-navy-muted/30" />
         </div>
 
         {/* Écran intérieur */}
-        <div className="rounded-[2rem] bg-bg-light dark:bg-bg-dark border border-line-light/60 dark:border-line-dark/60 overflow-hidden flex flex-col h-[480px] sm:h-[510px]">
+        <div className="rounded-[2rem] bg-bg-light dark:bg-bg-dark border border-line-light/60 dark:border-line-dark/60 overflow-hidden flex flex-col flex-1 min-h-0">
           {/* En-tête du téléphone */}
-          <div className="px-4 py-3 bg-surface-light/95 dark:bg-surface-dark/95 border-b border-line-light/70 dark:border-line-dark/70 backdrop-blur-md flex items-center justify-between shrink-0">
+          <div className="px-4 py-3 bg-surface-light/95 dark:bg-surface-dark/95 border-b border-line-light/70 dark:border-line-dark/70 backdrop-blur-md flex items-center justify-between shrink-0 h-[60px]">
             <div className="flex items-center gap-3 min-w-0">
               <div className="relative shrink-0">
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-denim-500 to-rose-powder p-0.5 flex items-center justify-center shadow-sm">
@@ -144,8 +185,10 @@ export const AskIkram: React.FC = () => {
 
           {/* Zone des messages défilante avec aria-live */}
           <div
+            ref={messagesContainerRef}
             aria-live="polite"
-            className="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-3 font-sans text-xs sm:text-sm"
+            style={{ overscrollBehavior: 'contain', overflowAnchor: 'none' }}
+            className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3.5 sm:p-4 space-y-3 font-sans text-xs sm:text-sm"
           >
             {/* Message de bienvenue */}
             <div className="flex items-start gap-2 max-w-[88%]">
@@ -198,36 +241,42 @@ export const AskIkram: React.FC = () => {
                 </div>
               </div>
             )}
-
-            <div ref={messagesEndRef} />
           </div>
 
           {/* Zone des puces de questions rapides */}
-          <div className="p-3 bg-surface-light/95 dark:bg-surface-dark/95 border-t border-line-light/70 dark:border-line-dark/70 shrink-0">
-            <div className="flex items-center justify-between mb-2">
+          <div
+            className="p-3 bg-surface-light/95 dark:bg-surface-dark/95 border-t border-line-light/70 dark:border-line-dark/70 shrink-0"
+            style={{ overflowAnchor: 'none' }}
+          >
+            <div className="flex items-center justify-between h-5 mb-2">
               <span className="text-[10px] font-mono uppercase tracking-wider text-content-secLight dark:text-content-secDark">
                 {t.askIkram.quickQuestionsLabel}
               </span>
-              {usedOptionIds.size > 0 && (
+              {usedOptionIds.size > 0 ? (
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="text-[11px] text-denim-600 dark:text-denim-400 hover:underline font-mono"
+                  className="text-[11px] text-denim-600 dark:text-denim-400 hover:underline font-mono leading-none"
                 >
                   {t.askIkram.resetBtn}
                 </button>
+              ) : (
+                <span className="h-3 text-[11px] invisible" aria-hidden="true">
+                  {t.askIkram.resetBtn}
+                </span>
               )}
             </div>
 
-            <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto">
+            <div className="flex flex-wrap gap-1.5 max-h-28 overflow-y-auto" style={{ overflowAnchor: 'none' }}>
               {askOptions.map(option => {
                 const isUsed = usedOptionIds.has(option.id);
                 return (
                   <button
                     key={option.id}
                     type="button"
-                    onClick={() => handleSelectOption(option)}
+                    onClick={(e) => handleSelectOption(option, e)}
                     disabled={isUsed || isTyping}
+                    tabIndex={isUsed ? -1 : 0}
                     className={`px-2.5 py-1.5 rounded-full text-xs font-medium transition-all duration-150 ${
                       isUsed
                         ? 'opacity-40 bg-surface-softLight/60 dark:bg-surface-softDark/60 text-content-secLight/60 dark:text-content-secDark/60 cursor-not-allowed border border-transparent'
